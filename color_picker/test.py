@@ -1,7 +1,7 @@
 import cv2
+import mido
 import numpy as np
 import rtmidi as midi
-import mido
 
 
 cap = cv2.VideoCapture(1)
@@ -34,8 +34,11 @@ cv2.namedWindow("all", 0)
 threshold = 2000000
 
 # MIDI Note spielen Funktion
+
+
 def playNote(note):
-    # Nehme CenterPosX vom Gesicht und normiere auf 1, dann auf bereich 0-127 erweitern
+    # Nehme CenterPosX vom Gesicht und
+    # normiere auf 1, dann auf bereich 0-127 erweitern
     message = mido.Message("note_on", note=note, velocity=127)
     midiOutput.send(message)  # MIDI Senden
 
@@ -58,7 +61,10 @@ while cap.isOpened():
     # Threshold the HSV image to get only red colors
     mask_purple = cv2.inRange(hsv, lower_purple, upper_purple)
 
-    masks = [mask_blue, mask_green, mask_red, mask_yellow, mask_purple, mask_turquoise]
+    masks = [
+        mask_blue, mask_green, mask_red,
+        mask_yellow, mask_purple, mask_turquoise,
+    ]
 
     numBlue = mask_blue.sum()
     numGreen = mask_green.sum()
