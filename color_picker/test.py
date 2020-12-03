@@ -3,11 +3,22 @@ import mido
 import numpy as np
 import rtmidi as midi
 
+config = {}
+try:
+    configFile = open("config", "rt", encoding="utf-8")
+    lines = configFile.readlines()
+    for line in lines:
+        line = line.strip().split("=")
+        config[line[0]] = line[1]
+except Exception as e:
+    print(f"Fehler beim Lesen der Konfigurationsdatei.\n{e}")
+    exit(1)
 
-cap = cv2.VideoCapture(1)
+
+cap = cv2.VideoCapture(config["CamDevice"])
 
 midiOut = midi.MidiOut()
-midiOutput = mido.open_output("LoopBe Internal MIDI 1")
+midiOutput = mido.open_output(config["MidiDevice"])
 
 # define range of blue color in HSV
 lower_blue = np.array([110, 50, 50])
@@ -32,6 +43,7 @@ count = 0
 cv2.namedWindow("all", 0)
 
 threshold = 2000000
+
 
 # MIDI Note spielen Funktion
 
@@ -74,7 +86,6 @@ while cap.isOpened():
     numPurple = mask_purple.sum()
 
     if count == 100:
-
         print("-----------------")
         print("Blue: {}".format(numBlue))
         print("Green: {}".format(numGreen))
