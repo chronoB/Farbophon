@@ -14,35 +14,42 @@ except Exception as e:
     print(f"Fehler beim Lesen der Konfigurationsdatei.\n{e}")
     exit(1)
 
+try:
+    cap = cv2.VideoCapture(int(config["CamDevice"]))
+except Exception:
+    print(
+        "Fehler beim Öffnen des Video-Gerätes. Ist das (",
+        config["CamDevice"], ") die richtige device-number?",
+    )
+    exit(1)
 
-cap = cv2.VideoCapture(config["CamDevice"])
 
 midiOut = midi.MidiOut()
 midiOutput = mido.open_output(config["MidiDevice"])
 
+threshold = int(config["Threshold"])
+
 # define range of blue color in HSV
-lower_blue = np.array([110, 50, 50])
+lower_blue = np.array([110, 50, 0])
 upper_blue = np.array([130, 255, 255])
 # define range of green color in HSV
-lower_green = np.array([60, 50, 50])
+lower_green = np.array([60, 50, 0])
 upper_green = np.array([80, 255, 255])
 # define range of red color in HSV
-lower_red = np.array([160, 100, 100])
+lower_red = np.array([160, 100, 0])
 upper_red = np.array([200, 255, 255])
 # define range of yellow color in HSV
-lower_yellow = np.array([20, 100, 100])
+lower_yellow = np.array([20, 100, 0])
 upper_yellow = np.array([40, 255, 255])
 # define range of turquoise color in HSV
-lower_turquoise = np.array([80, 100, 100])
+lower_turquoise = np.array([80, 100, 0])
 upper_turquoise = np.array([100, 255, 255])
 # define range of purple color in HSV
-lower_purple = np.array([140, 100, 100])
+lower_purple = np.array([140, 100, 0])
 upper_purple = np.array([160, 255, 255])
 
 count = 0
 cv2.namedWindow("all", 0)
-
-threshold = 2000000
 
 
 # MIDI Note spielen Funktion
