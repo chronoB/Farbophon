@@ -66,9 +66,8 @@ button{
     background: linear-gradient(30deg, #2c0522 10%, #2c2c05 25%, #072205 50%, #0a3236 75%, #24093a 90%);;
     color: white;
 }
-.button-wrap{
+.rainbow-wrap{
   margin-bottom: 10px;
-  max-width: 250px;
   position: relative;
   background: linear-gradient(30deg, #d367c1 10%, #dedf40 25%, #62cb5c 50%, #00bbcb 75%, #ab79d6 90%);
   padding: 3px;

@@ -1,10 +1,9 @@
-
 document.addEventListener("DOMContentLoaded", init)
 
 function init() {
-    let buttons = document.querySelectorAll(".button-wrap")
-    buttons.forEach(btn => {
-        btn.addEventListener("click", initAfterLoader)
+    let navButtons = document.querySelectorAll(".nav-button")
+    navButtons.forEach(btn => {
+        btn.addEventListener("click", event => initAfterLoader(event))
     })
 }
 
@@ -16,7 +15,12 @@ function removePreLoader() {
 }
 
 
-function initAfterLoader() {
+function initAfterLoader(event) {
     let afterloader = document.getElementById("afterloader")
     afterloader.classList.add("show")
+    window.setTimeout(redirectToPage(event.target), 2000)
+}
+
+function redirectToPage(target) {
+    window.location = target.dataset.target
 }
