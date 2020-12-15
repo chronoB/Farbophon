@@ -1,5 +1,6 @@
 import cv2
 import mido
+import numpy as np
 import rtmidi as midi
 
 config = {}
@@ -43,56 +44,56 @@ def playNote(note):
 
 colorDict = {
     "red": {
-        "hsv": [0, 100, 255],
+        "hue": 0,
+        "threshold": 10,
         "mask": 0,
         "count": 0,
         "cal": 0,
     },
     "green": {
-        "hsv": [120, 100, 0],
+        "hue": 120,
+        "threshold": 20,
         "mask": 0,
         "count": 0,
         "cal": 0,
     },
     "blue": {
-        "hsv": [240, 100, 0],
+        "hue": 230,
+        "threshold": 10,
         "mask": 0,
         "count": 0,
         "cal": 0,
     },
     "cyan": {
-        "hsv": [196, 76, 0],
+        "hue": 190,
+        "threshold": 10,
         "mask": 0,
         "count": 0,
         "cal": 0,
     },
     "magenta": {
-        "hsv": [300, 100, 0],
+        "hue": 290,
+        "threshold": 20,
         "mask": 0,
         "count": 0,
         "cal": 0,
     },
     "yellow": {
-        "hsv": [53, 57, 0],
+        "hue": 50,
+        "threshold": 5,
         "mask": 0,
         "count": 0,
         "cal": 0,
     },
-}
 
-colors = ["blue", "green", "red", "yellow", "turquoise", "purple"]
-calibrateValues = {
-    "blue": 0, "green": 0, "red": 0,
-    "yellow": 0, "turquoise": 0, "purple": 0,
 }
-colorValues = {}
-colorMasks = {}
 
 
 def calibrateNow():
     print("ISCH KALIBRIERE JEZZ!!")
     for k, v in colorDict.items():
         colorDict[k]["cal"] = colorDict[k]["count"]
+        print(colorDict[k]["cal"])
 
 
 while cap.isOpened():
@@ -102,33 +103,45 @@ while cap.isOpened():
 
     for key, value in colorDict.items():
         currentColor = key
-        hue = value["hsv"][0]
-        sat = value["hsv"][1]
+        hue = (value["hue"] / 360) * 180
+        hueThreshold = value["threshold"]
 
-        th = 10
-        maskHue = cv2.inRange(frameH, hue - th, hue + th)
-        maskSat = cv2.inRange(frameS, sat - th, sat + th)
-        maskHueSat = maskHue ** maskSat
-        colorDict[currentColor]["mask"] = maskHueSat
+        if (hue - hueThreshold) < 0:
+            maskHue1 = cv2.inRange(frameH, 180 - abs(hue - hueThreshold), 180)
+            maskHue2 = cv2.inRange(frameH, 0, hue + hueThreshold)
+            maskHue = cv2.bitwise_or(maskHue1, maskHue2)
+
+        else:
+            maskHue = cv2.inRange(
+                frameH, hue - hueThreshold, hue + hueThreshold,
+            )
+
+        maskSat = cv2.inRange(frameS, 100, 255)
+
+        mask = cv2.bitwise_and(maskHue, maskSat)
+
+        cv2.imshow(currentColor, mask)
+
+        colorDict[currentColor]["mask"] = np.int64(mask)
+
         colorDict[currentColor]["count"] = \
-            colorDict[currentColor]["mask"].sum()
-
-        cv2.imshow(currentColor, maskHue)
+            np.int64(colorDict[currentColor]["mask"].sum())
 
         if (
-            colorDict[currentColor]["count"] -
-            colorDict[currentColor]["cal"]
+                colorDict[currentColor]["count"] -
+                colorDict[currentColor]["cal"]
         ) > threshold:
             print(currentColor)
 
-    #
-    # if count == 50:
-    #     print("-------------------")
-    #     for c in colors:
-    #         print(c, ":", colorValues[c])
-    #
-    #     count = 0
-    #     print("-------------------")
+    if count == 50:
+        print("-------------------")
+        for key in colorDict:
+            print(
+                key, "\t\t\t", colorDict[key]["count"] -
+                colorDict[key]["cal"],
+            )
+        print("-------------------")
+        count = 0
 
     # frame = cv2.bitwise_and(frame, frame, mask=v["mask"])
     # numMax = np.max(numArray)
