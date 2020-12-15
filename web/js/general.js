@@ -18,7 +18,9 @@ function removePreLoader() {
 function initAfterLoader(event) {
     let afterloader = document.getElementById("afterloader")
     afterloader.classList.add("show")
-    window.setTimeout(redirectToPage(event.target), 2000)
+    window.setTimeout(function () {
+        redirectToPage(event.target)
+    }, 500)
 }
 
 function redirectToPage(target) {
