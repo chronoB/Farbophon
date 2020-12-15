@@ -93,3 +93,14 @@ button{
 #afterloader{
     top: 100%;
 }
+
+
+/* options */
+#curKey {
+    display: flex;
+    margin-bottom: 5px;
+}
+#curKey > p {
+    padding-left: 5px;
+    margin: 0;
+}
