@@ -1,43 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="de">
+    <head>
+        <meta charset="utf-8" />
 
-<head>
-    <meta charset="utf-8">
+        <title>Farbophon</title>
+        <meta name="description" content="Farbophon" />
+        <meta name="author" content="Team 10" />
 
-    <title>Farbophon</title>
-    <meta name="description" content="Farbophon">
-    <meta name="author" content="Team 10">
+        <link rel="stylesheet" href="css/styles.css" />
 
-    <link rel="stylesheet" href="css/styles.css">
+        <!-- Just for Testing TODO: remove link to google cdn!-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap"
+            rel="stylesheet"
+        />
+        <script src="js/general.js"></script>
+    </head>
 
-    <!-- Just for Testing TODO: remove link to google cdn!-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet">
-    <script src="js/general.js"></script>
-</head>
+    <body>
+        <div id="preloader" class="loader show"></div>
+        <div id="afterloader" class="loader"></div>
 
-<body>
-
-    <div id="preloader" class="loader show">
-
-    </div>
-    <div id="afterloader" class="loader">
-
-    </div>
-
-    <div id="content">
-        <div id="headline">
-            <h1 id="headline-text">
-                FARBOPHON
-            </h1>
-            <svg version="1.1" id="headline-guitar" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px"
-                viewBox="0 0 481.677 481.678" style="enable-background:new 0 0 481.677
-            481.678;" xml:space="preserve">
-                <g>
+        <div id="content">
+            <div id="headline">
+                <h1 id="headline-text">FARBOPHON</h1>
+                <svg
+                    version="1.1"
+                    id="headline-guitar"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="100px"
+                    height="100px"
+                    viewBox="0 0 481.677 481.678"
+                    style="enable-background: new 0 0 481.677 481.678"
+                    xml:space="preserve"
+                >
                     <g>
-                        <path d="M44.812,438.499c72.248,66.792,155.854,33.166,155.854,33.166S178.86,334.45,304.26,337.176
+                        <g>
+                            <path
+                                d="M44.812,438.499c72.248,66.792,155.854,33.166,155.854,33.166S178.86,334.45,304.26,337.176
                    c0,0-7.273-24.534,19.998-58.168l-4.096-4.092c0,0-33.166,34.083-65.434,28.181c-21.78-3.987-16.417-23.492-10.782-36.447
                    l129.61-131.652c12.828-11.071,29.37-13.395,38.992-5.176c-0.673-13.187,5.414-28.427,17.524-40.541
                    c12.712-12.706,28.842-18.751,42.467-17.34l9.137-9.135l-1.378-27.966l-2.886-2.879c-1.026,3.078-2.545,6.233-4.652,9.279
@@ -46,29 +51,50 @@
                    c0.204,12.868-5.843,27.475-17.549,39.174c-11.71,11.696-26.305,17.751-39.177,17.545l-0.705,0.705
                    c7.942,9.989,5.121,26.904-6.633,39.653L220.113,236.549c-6.344,3.228-13.337,5.642-18.542,4.292
                    c-12.269-3.178-40.892-4.544,34.534-107.229l-4.089-4.089c0,0-46.805,36.802-75.426,37.257c0,0,11.356,125.862-147.219,117.229
-                   C9.378,284.009-27.432,371.712,44.812,438.499z" />
+                   C9.378,284.009-27.432,371.712,44.812,438.499z"
+                            />
+                        </g>
                     </g>
-                </g>
-            </svg>
-        </div>
+                </svg>
+            </div>
 
-        <div class="rainbow-wrap">
-            <button class="nav-button" id="singleplayerButton" data-target="/web/html/singleplayer.html">
-                Einzelspieler
-            </button>
+            <div class="rainbow-wrap">
+                <button
+                    class="nav-button"
+                    id="singleplayerButton"
+                    data-target="/web/html/singleplayer.html"
+                >
+                    Einzelspieler
+                </button>
+            </div>
+            <div class="rainbow-wrap">
+                <button
+                    class="nav-button"
+                    id="testareaButton"
+                    data-target="/web/html/testarea.html"
+                >
+                    Testbereich
+                </button>
+            </div>
+            <div class="rainbow-wrap">
+                <button
+                    class="nav-button"
+                    id="optionsButton"
+                    data-target="/web/html/options.html"
+                >
+                    Optionen
+                </button>
+            </div>
+            <!-- This button can be removed for production-->
+            <div class="rainbow-wrap">
+                <button
+                    class="nav-button"
+                    id="communicationTestButton"
+                    data-target="/web/html/communicationTest.html"
+                >
+                    ServerTest
+                </button>
+            </div>
         </div>
-        <div class="rainbow-wrap">
-            <button class="nav-button" id="testareaButton" data-target="/web/html/testarea.html">
-                Testbereich
-            </button>
-        </div>
-        <div class="rainbow-wrap">
-            <button class="nav-button" id="optionsButton" data-target="/web/html/options.html">
-                Optionen
-            </button>
-        </div>
-
-    </div>
-</body>
-
+    </body>
 </html>
