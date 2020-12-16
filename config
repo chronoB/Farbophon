@@ -1,0 +1,5 @@
+CamDevice=0
+MidiDevice=LoopBe Internal MIDI 1
+Threshold=5000000
+API-Key=317bfb53802b07276e13c220756dfccb3c0d159a66e7b521
+Server-URI=http://DESKTOP-23TRQVV:5253
