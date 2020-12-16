@@ -39,7 +39,6 @@ threshold = int(config["Threshold"])
 devMode = bool(int(config["DevMode"]))
 print(devMode)
 count = 0
-cv2.namedWindow("all", 0)
 colorDict = {
     "red": {
         "hue": 0,
@@ -90,10 +89,16 @@ colorDict = {
 def calibrateNow():
     for k, v in colorDict.items():
         colorDict[k]["cal"] = colorDict[k]["count"]
+    print("Kalibriere jetzt!")
 
 
 while cap.isOpened():
+    colorCountMax = 0
+    colorCountWinner = ""
     ret, frame = cap.read()
+    if not ret:
+        print("Fehler beim Lesen der Webcam!")
+        exit(1)
     currentFrameHsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     frameH, frameS, frameV = cv2.split(currentFrameHsv)
 
@@ -106,7 +111,6 @@ while cap.isOpened():
             maskHue1 = cv2.inRange(frameH, 180 - abs(hue - hueThreshold), 180)
             maskHue2 = cv2.inRange(frameH, 0, hue + hueThreshold)
             maskHue = cv2.bitwise_or(maskHue1, maskHue2)
-
         else:
             maskHue = cv2.inRange(
                 frameH, hue - hueThreshold, hue + hueThreshold,
@@ -122,13 +126,25 @@ while cap.isOpened():
         colorDict[currentColor]["count"] = \
             np.int64(colorDict[currentColor]["mask"].sum())
 
+        # wenn colorCount nach Abzug von Kalibrierung
+        # größer ist als der aktuelle colorCountMax
+        #
+        # Es wird also immer nur der aktuell größte Farbwert
+        # gespeichert und dann auch ausgegeben (winner takes all)
         if (
-                colorDict[currentColor]["count"] -
-                colorDict[currentColor]["cal"]
-        ) > threshold:
-            print(currentColor)
-            # Hier die Midi Note senden
-            # vorher winnertakesitall
+            colorDict[currentColor]["count"] -
+            colorDict[currentColor]["cal"] > colorCountMax
+        ):
+            # dann neuen colorCountMax setzen
+            colorCountMax = colorDict[currentColor]["count"]
+            # und die aktuelle Farbe in Winner-Variable speichern
+            colorCountWinner = currentColor
+
+    # Wenn colorCount größer als threshold aus config
+    if colorCountMax > threshold:
+        # TODO midi senden
+        # und Farbname ausgeben
+        print(colorCountWinner)
 
     if count == 50 and devMode:
         print("-------------------")
@@ -141,7 +157,7 @@ while cap.isOpened():
         count = 0
 
     count += 1
-    cv2.imshow("all", frame)
+    cv2.imshow("Input Video", frame)
 
     key = cv2.waitKey(25)
     if key == 27:
