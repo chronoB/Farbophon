@@ -1,5 +1,6 @@
+import time
+
 import cv2
-import mido
 import numpy as np
 import rtmidi as midi
 
@@ -25,14 +26,17 @@ except Exception:
 
 # MIDI io initialisieren
 midiOut = midi.MidiOut()
-midiOutput = mido.open_output(config["MidiDevice"])
+midiOut.open_port(int(config["MidiDevice"]))
+lastNote = 0
 
 
 def playNote(note):
-    # Nehme CenterPosX vom Gesicht und
-    # normiere auf 1, dann auf bereich 0-127 erweitern
-    message = mido.Message("note_on", note=note, velocity=127)
-    midiOutput.send(message)  # MIDI Senden
+    global lastNote
+    if lastNote != note:
+        midiOut.send_message([0x90, note, 127])
+        time.sleep(.10)
+        midiOut.send_message([0x80, note, 0])
+        lastNote = note
 
 
 threshold = int(config["Threshold"])
@@ -46,6 +50,7 @@ colorDict = {
         "mask": 0,
         "count": 0,
         "cal": 0,
+        "note": 1,
     },
     "green": {
         "hue": 120,
@@ -53,6 +58,7 @@ colorDict = {
         "mask": 0,
         "count": 0,
         "cal": 0,
+        "note": 2,
     },
     "blue": {
         "hue": 230,
@@ -60,6 +66,7 @@ colorDict = {
         "mask": 0,
         "count": 0,
         "cal": 0,
+        "note": 3,
     },
     "cyan": {
         "hue": 190,
@@ -67,6 +74,7 @@ colorDict = {
         "mask": 0,
         "count": 0,
         "cal": 0,
+        "note": 4,
     },
     "magenta": {
         "hue": 290,
@@ -74,6 +82,7 @@ colorDict = {
         "mask": 0,
         "count": 0,
         "cal": 0,
+        "note": 5,
     },
     "yellow": {
         "hue": 50,
@@ -81,6 +90,7 @@ colorDict = {
         "mask": 0,
         "count": 0,
         "cal": 0,
+        "note": 6,
     },
 
 }
@@ -142,9 +152,12 @@ while cap.isOpened():
 
     # Wenn colorCount größer als threshold aus config
     if colorCountMax > threshold:
-        # TODO midi senden
+        playNote(colorDict[colorCountWinner]["note"])
         # und Farbname ausgeben
         print(colorCountWinner)
+    else:
+        # Keine Farbe erkannt, Note 7 senden
+        playNote(7)
 
     if count == 50 and devMode:
         print("-------------------")
@@ -159,7 +172,7 @@ while cap.isOpened():
     count += 1
     cv2.imshow("Input Video", frame)
 
-    key = cv2.waitKey(25)
+    key = cv2.waitKey(10)
     if key == 27:
         break
     elif key != -1:
