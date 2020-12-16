@@ -5,7 +5,7 @@ import rtmidi as midi
 
 config = {}
 try:
-    configFile = open("config", "rt", encoding="utf-8")
+    configFile = open("../config", "rt", encoding="utf-8")
     lines = configFile.readlines()
     for line in lines:
         line = line.strip().split("=")
