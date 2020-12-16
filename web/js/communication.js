@@ -20,20 +20,26 @@ function sendHighscore(user, score) {
         },
         body: JSON.stringify(payload),
     }
-    fetch(sessionStorage.getItem("Server-URI") + "/farbophon/addScore", options)
-        .then((request) => request.json())
-        .then((data) => {
-            //console.log(data)
+    return fetch(
+        sessionStorage.getItem("Server-URI") + "/farbophon/addScore",
+        options
+    ).then((request) => {
+        return request.json().then((data) => {
+            return data
         })
+    })
 }
 
 function getHighscore() {
     let options = {
         method: "get",
     }
-    fetch(sessionStorage.getItem("Server-URI") + "/farbophon/addScore", options)
-        .then((request) => request.json())
-        .then((data) => {
-            //console.log(data)
+    return fetch(
+        sessionStorage.getItem("Server-URI") + "/farbophon/getHighscore",
+        options
+    ).then((request) => {
+        return request.json().then((data) => {
+            return data
         })
+    })
 }
