@@ -23,16 +23,9 @@ except Exception:
     )
     exit(1)
 
+# MIDI io initialisieren
 midiOut = midi.MidiOut()
 midiOutput = mido.open_output(config["MidiDevice"])
-
-threshold = int(config["Threshold"])
-
-count = 0
-cv2.namedWindow("all", 0)
-
-
-# MIDI Note spielen Funktion
 
 
 def playNote(note):
@@ -42,6 +35,9 @@ def playNote(note):
     midiOutput.send(message)  # MIDI Senden
 
 
+threshold = int(config["Threshold"])
+count = 0
+cv2.namedWindow("all", 0)
 colorDict = {
     "red": {
         "hue": 0,
@@ -117,13 +113,11 @@ while cap.isOpened():
             )
 
         maskSat = cv2.inRange(frameS, 100, 255)
-
         mask = cv2.bitwise_and(maskHue, maskSat)
 
         cv2.imshow(currentColor, mask)
 
         colorDict[currentColor]["mask"] = np.int64(mask)
-
         colorDict[currentColor]["count"] = \
             np.int64(colorDict[currentColor]["mask"].sum())
 
@@ -132,6 +126,8 @@ while cap.isOpened():
                 colorDict[currentColor]["cal"]
         ) > threshold:
             print(currentColor)
+            # Hier die Midi Note senden
+            # vorher winnertakesitall
 
     if count == 50:
         print("-------------------")
@@ -142,17 +138,6 @@ while cap.isOpened():
             )
         print("-------------------")
         count = 0
-
-    # frame = cv2.bitwise_and(frame, frame, mask=v["mask"])
-    # numMax = np.max(numArray)
-    # if numMax > threshold:
-    #     for i in range(len(numArray)):
-    #         if numArray[i] == numMax:
-    #             frame = cv2.bitwise_and(frame, frame, mask=masks[i])
-    #             #playNote(i)
-    #
-    # else:
-    #     playNote(6)
 
     count += 1
     cv2.imshow("all", frame)
