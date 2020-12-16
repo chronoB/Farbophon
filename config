@@ -1,3 +1,4 @@
 CamDevice=0
 MidiDevice=LoopBe Internal MIDI 1
 Threshold=5000000
+DevMode=0

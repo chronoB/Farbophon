@@ -36,6 +36,8 @@ def playNote(note):
 
 
 threshold = int(config["Threshold"])
+devMode = bool(int(config["DevMode"]))
+print(devMode)
 count = 0
 cv2.namedWindow("all", 0)
 colorDict = {
@@ -86,10 +88,8 @@ colorDict = {
 
 
 def calibrateNow():
-    print("ISCH KALIBRIERE JEZZ!!")
     for k, v in colorDict.items():
         colorDict[k]["cal"] = colorDict[k]["count"]
-        print(colorDict[k]["cal"])
 
 
 while cap.isOpened():
@@ -115,7 +115,8 @@ while cap.isOpened():
         maskSat = cv2.inRange(frameS, 100, 255)
         mask = cv2.bitwise_and(maskHue, maskSat)
 
-        cv2.imshow(currentColor, mask)
+        if devMode:
+            cv2.imshow(currentColor, mask)
 
         colorDict[currentColor]["mask"] = np.int64(mask)
         colorDict[currentColor]["count"] = \
@@ -129,7 +130,7 @@ while cap.isOpened():
             # Hier die Midi Note senden
             # vorher winnertakesitall
 
-    if count == 50:
+    if count == 50 and devMode:
         print("-------------------")
         for key in colorDict:
             print(
