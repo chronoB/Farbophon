@@ -1,0 +1,50 @@
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "extends": ["plugin:compat/recommended", "eslint:recommended"],
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "rules": {
+        "no-undef": "off",
+        "no-await-in-loop": "error",
+        "no-console": "error",
+        "no-template-curly-in-string": "error",
+        "no-unreachable-loop": "warn",
+        "array-callback-return": [
+            "warn",
+            {
+                "checkForEach": true
+            }
+        ],
+        "block-scoped-var": "warn",
+        "consistent-return": "warn",
+        "default-param-last": "warn",
+        "dot-notation": "warn",
+        "eqeqeq": "warn",
+        "no-alert": "error",
+        "no-else-return": "warn",
+        "no-eval": "error",
+        "no-implicit-coercion": "warn",
+        "no-implicit-globals": "error",
+        "no-invalid-this": "error",
+        "no-lone-blocks": "error",
+        "no-magic-numbers": "warn",
+        "no-multi-spaces": "warn",
+        "no-new": "error",
+        "no-new-wrappers": "warn",
+        "no-param-reassign": "error",
+        "no-return-assign": ["error", "always"],
+        "no-self-compare": "error",
+        "no-sequences": "error",
+        "no-throw-literal": "warn",
+        "no-unmodified-loop-condition": "error",
+        "no-unused-expressions": "warn",
+        "no-unused-vars": "warn",
+        "strict": "warn",
+        "no-shadow": "error"
+    }
+}
