@@ -26,6 +26,8 @@ except Exception:
 
 # MIDI io initialisieren
 midiOut = midi.MidiOut()
+midiIn = midi.MidiIn()
+midiIn.open_port(0)
 midiOut.open_port(int(config["MidiDevice"]))
 lastNote = 0
 
@@ -159,7 +161,7 @@ while cap.isOpened():
         # Keine Farbe erkannt, Note 7 senden
         playNote(7)
 
-    if count == 50 and devMode:
+    if count == 50 and devMode and False:
         print("-------------------")
         for key in colorDict:
             print(
@@ -171,6 +173,13 @@ while cap.isOpened():
 
     count += 1
     cv2.imshow("Input Video", frame)
+
+    midiMessage = midiIn.get_message()
+    if midiMessage:
+        if midiMessage[0][0] == 0x91:
+            print("noteOn!!")
+        elif midiMessage[0][0] == 0x81:
+            print("noteOFF!!")
 
     key = cv2.waitKey(10)
     if key == 27:
