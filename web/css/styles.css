@@ -9,7 +9,6 @@ html{
 }
 
 body{
-
     height: 100%;
     width: 100%;
     margin: 0 !important;
@@ -106,3 +105,132 @@ button{
     padding-left: 5px;
     margin: 0;
 }
+
+
+
+/* ------------------------------------------------------------------- */
+/* single player */
+
+#timeline {
+	width: 600px;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left: -300px;
+	display: flex;
+    flex-direction: column;
+    perspective: 150;
+	-webkit-perspective: 150;
+	perspective-origin: 50% 0%;
+}
+#timeline .strings {
+	width: 100%;
+    height: 100%;
+    padding: 0;
+    transform: rotateX(90deg);
+	-webkit-transform: rotateX(90deg);
+	transform-origin: 100% 100%;
+	background: #212121;
+	box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+#timeline .strings li {
+	width: calc(100%/6);
+	height: 100%;
+	display: inline-block;
+	margin-left: -4px;
+	position: relative;
+	text-align: center;
+}
+#timeline .strings li:after {
+	content: "";
+	width: 4px;
+	height: 100%;
+	background: #656565;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: 2px;
+	z-index: -1;
+}
+#timeline .strings li:first-child {
+	margin-left: 0;
+}
+
+#timeline .strings li button {
+	width: 36px;
+	height: 36px;
+	background: #fff;
+	border: 6px solid transparent;
+	border-radius: 50%;
+	display: inline-block;
+	position: absolute;
+	left: 50%;
+	margin-left: -14px;
+	font-size: 0;
+}
+#timeline .strings li:nth-child(1) button {
+	border-color: #ff0000;
+}
+#timeline .strings li:nth-child(2) button {
+	border-color: #00ff00;
+}
+#timeline .strings li:nth-child(3) button {
+	border-color: #0000ff;
+}
+#timeline .strings li:nth-child(4) button {
+	border-color: #00ffff;
+}
+#timeline .strings li:nth-child(5) button {
+	border-color: #ff00ff;
+}
+#timeline .strings li:nth-child(6) button {
+	border-color: #ffff00;
+}
+
+#timeline .notes {
+	width: 100%;
+	height: 64px;
+	position: relative;
+	top: -82px;
+	display: flex;
+}
+#timeline .notes div {
+	width: 64px;
+	height: 64px;
+	border: 3px solid #fff;
+	border-radius: 100%;
+	transition: all 100ms;
+	margin-left: 25px;
+}
+#timeline .notes div:nth-child(1) {
+	background: #ff0000;
+	box-shadow: 0 0 10px #4caf50;
+	margin-left: 35px;
+}
+#timeline .notes div:nth-child(2) {
+	background: #00ff00;
+	box-shadow: 0 0 10px #f44336;
+}
+#timeline .notes div:nth-child(3) {
+	background: #0000ff;
+	box-shadow: 0 0 10px #ffc107;
+}
+#timeline .notes div:nth-child(4) {
+	background: #00FFFF;
+	box-shadow: 0 0 10px #2196f3;
+}
+#timeline .notes div:nth-child(5) {
+	background: #ff00ff;
+	box-shadow: 0 0 10px #ff9800;
+}
+#timeline .notes div:nth-child(6) {
+	background: #ffff00;
+	box-shadow: 0 0 10px #ff9800;
+}
+
+#timeline .notes div.played{
+	transform: scale(1.2);
+}
+/* end single player */
+/* ------------------------------------------------------------------- */
