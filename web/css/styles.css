@@ -67,6 +67,7 @@ button{
     color: white;
 }
 .rainbow-wrap{
+  z-index: 2;
   margin-bottom: 10px;
   position: relative;
   background: linear-gradient(30deg, #d367c1 10%, #dedf40 25%, #62cb5c 50%, #00bbcb 75%, #ab79d6 90%);
@@ -85,12 +86,14 @@ button{
 }
 
 #preloader{
+    z-index: 10;
     top: -100vh;
 }
 #preloader.show, #afterloader.show{
     top: 0;
 }
 #afterloader{
+    z-index: 10;
     top: 100%;
 }
 
@@ -105,4 +108,13 @@ button{
     text-align: right;
     padding-left: 5px;
     margin: 0;
+}
+
+
+/* testarea */
+canvas {
+    display: block;
+    position:absolute;
+    width: 100vw;
+    height: 100vh;
 }
