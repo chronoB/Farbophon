@@ -45,6 +45,7 @@
         "no-unused-expressions": "warn",
         "no-unused-vars": "warn",
         "strict": "warn",
-        "no-shadow": "error"
+        "no-shadow": "error",
+        "no-prototype-builtins": "warn"
     }
 }

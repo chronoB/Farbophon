@@ -1,29 +1,29 @@
-html{
-    font-family: 'New Rocker', monospace;
+html {
+    font-family: "New Rocker", monospace;
 
     height: 100%;
     width: 100%;
     margin: 0 !important;
-    padding: 0!important;
+    padding: 0 !important;
     font-size: 16px;
 }
 
-body{
+body {
     height: 100%;
     width: 100%;
     margin: 0 !important;
-    padding: 0!important;
+    padding: 0 !important;
     min-height: 100vh;
     overflow: hidden;
     font-size: 16px;
 }
 
-#content{
+#content {
     background: url("https://images.alphacoders.com/671/thumb-1920-671836.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     padding: 10%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -42,57 +42,73 @@ body{
     position: relative;
     font-size: 1.3em;
 }
-#headline-text{
+#headline-text {
     position: absolute;
-    top:-40px;
+    top: -40px;
     left: -120px;
-    z-index:1;
+    z-index: 1;
 
     /* Prefix required. Even Firefox only supports the -webkit- prefix */
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: white;
 }
-#headline-guitar{
+#headline-guitar {
     position: absolute;
     top: -50px;
     left: -50px;
 }
 
-button{
+button {
     font-size: 1em;
-    font-family: 'New Rocker', monospace;
-    padding:1em;
-    background: linear-gradient(30deg, #2c0522 10%, #2c2c05 25%, #072205 50%, #0a3236 75%, #24093a 90%);
+    font-family: "New Rocker", monospace;
+    padding: 1em;
+    background: linear-gradient(
+        30deg,
+        #2c0522 10%,
+        #2c2c05 25%,
+        #072205 50%,
+        #0a3236 75%,
+        #24093a 90%
+    );
     color: white;
 }
-.rainbow-wrap{
-  margin-bottom: 10px;
-  position: relative;
-  background: linear-gradient(30deg, #d367c1 10%, #dedf40 25%, #62cb5c 50%, #00bbcb 75%, #ab79d6 90%);
-  padding: 3px;
+.rainbow-wrap {
+    z-index: 2;
+    margin-bottom: 10px;
+    position: relative;
+    background: linear-gradient(
+        30deg,
+        #d367c1 10%,
+        #dedf40 25%,
+        #62cb5c 50%,
+        #00bbcb 75%,
+        #ab79d6 90%
+    );
+    padding: 3px;
 }
 
-
-.loader{
+.loader {
     position: absolute;
     left: 0;
-    height:100%;
+    height: 100%;
     width: 100%;
     z-index: 2;
     background: black;
     transition: top 0.4s ease-in-out;
 }
 
-#preloader{
+#preloader {
+    z-index: 10;
     top: -100vh;
 }
-#preloader.show, #afterloader.show{
+#preloader.show,
+#afterloader.show {
     top: 0;
 }
-#afterloader{
+#afterloader {
+    z-index: 10;
     top: 100%;
 }
-
 
 /* options */
 .config-container > div {
@@ -106,131 +122,137 @@ button{
     margin: 0;
 }
 
-
-
 /* ------------------------------------------------------------------- */
 /* single player */
 
 #timeline {
-	width: 600px;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 50%;
-	margin-left: -300px;
-	display: flex;
+    width: 600px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -300px;
+    display: flex;
     flex-direction: column;
     perspective: 150;
-	-webkit-perspective: 150;
-	perspective-origin: 50% 0%;
+    -webkit-perspective: 150;
+    perspective-origin: 50% 0%;
 }
 #timeline .strings {
-	width: 100%;
+    width: 100%;
     height: 100%;
     padding: 0;
     transform: rotateX(90deg);
-	-webkit-transform: rotateX(90deg);
-	transform-origin: 100% 100%;
-	background: #212121;
-	box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+    -webkit-transform: rotateX(90deg);
+    transform-origin: 100% 100%;
+    background: #212121;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
 }
 #timeline .strings li {
-	width: calc(100%/6);
-	height: 100%;
-	display: inline-block;
-	margin-left: -4px;
-	position: relative;
-	text-align: center;
+    width: calc(100% / 6);
+    height: 100%;
+    display: inline-block;
+    margin-left: -4px;
+    position: relative;
+    text-align: center;
 }
 #timeline .strings li:after {
-	content: "";
-	width: 4px;
-	height: 100%;
-	background: #656565;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	margin-left: 2px;
-	z-index: -1;
+    content: "";
+    width: 4px;
+    height: 100%;
+    background: #656565;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: 2px;
+    z-index: -1;
 }
 #timeline .strings li:first-child {
-	margin-left: 0;
+    margin-left: 0;
 }
 
 #timeline .strings li button {
-	width: 36px;
-	height: 36px;
-	background: #fff;
-	border: 6px solid transparent;
-	border-radius: 50%;
-	display: inline-block;
-	position: absolute;
-	left: 50%;
-	margin-left: -14px;
-	font-size: 0;
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border: 6px solid transparent;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-left: -14px;
+    font-size: 0;
 }
 #timeline .strings li:nth-child(1) button {
-	border-color: #ff0000;
+    border-color: #ff0000;
 }
 #timeline .strings li:nth-child(2) button {
-	border-color: #00ff00;
+    border-color: #00ff00;
 }
 #timeline .strings li:nth-child(3) button {
-	border-color: #0000ff;
+    border-color: #0000ff;
 }
 #timeline .strings li:nth-child(4) button {
-	border-color: #00ffff;
+    border-color: #00ffff;
 }
 #timeline .strings li:nth-child(5) button {
-	border-color: #ff00ff;
+    border-color: #ff00ff;
 }
 #timeline .strings li:nth-child(6) button {
-	border-color: #ffff00;
+    border-color: #ffff00;
 }
 
 #timeline .notes {
-	width: 100%;
-	height: 64px;
-	position: relative;
-	top: -82px;
-	display: flex;
+    width: 100%;
+    height: 64px;
+    position: relative;
+    top: -82px;
+    display: flex;
 }
 #timeline .notes div {
-	width: 64px;
-	height: 64px;
-	border: 3px solid #fff;
-	border-radius: 100%;
-	transition: all 100ms;
-	margin-left: 25px;
+    width: 64px;
+    height: 64px;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    transition: all 100ms;
+    margin-left: 25px;
 }
 #timeline .notes div:nth-child(1) {
-	background: #ff0000;
-	box-shadow: 0 0 10px #4caf50;
-	margin-left: 35px;
+    background: #ff0000;
+    box-shadow: 0 0 10px #4caf50;
+    margin-left: 35px;
 }
 #timeline .notes div:nth-child(2) {
-	background: #00ff00;
-	box-shadow: 0 0 10px #f44336;
+    background: #00ff00;
+    box-shadow: 0 0 10px #f44336;
 }
 #timeline .notes div:nth-child(3) {
-	background: #0000ff;
-	box-shadow: 0 0 10px #ffc107;
+    background: #0000ff;
+    box-shadow: 0 0 10px #ffc107;
 }
 #timeline .notes div:nth-child(4) {
-	background: #00FFFF;
-	box-shadow: 0 0 10px #2196f3;
+    background: #00ffff;
+    box-shadow: 0 0 10px #2196f3;
 }
 #timeline .notes div:nth-child(5) {
-	background: #ff00ff;
-	box-shadow: 0 0 10px #ff9800;
+    background: #ff00ff;
+    box-shadow: 0 0 10px #ff9800;
 }
 #timeline .notes div:nth-child(6) {
-	background: #ffff00;
-	box-shadow: 0 0 10px #ff9800;
+    background: #ffff00;
+    box-shadow: 0 0 10px #ff9800;
 }
 
-#timeline .notes div.played{
-	transform: scale(1.2);
+#timeline .notes div.played {
+    transform: scale(1.2);
 }
 /* end single player */
 /* ------------------------------------------------------------------- */
+
+/* testarea */
+canvas {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}

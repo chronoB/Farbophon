@@ -1,59 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="de">
+    <head>
+        <meta charset="utf-8" />
 
-<head>
-    <meta charset="utf-8">
+        <title>Farbophon</title>
+        <meta name="description" content="Farbophon" />
+        <meta name="author" content="Team 10" />
 
-    <title>Farbophon</title>
-    <meta name="description" content="Farbophon">
-    <meta name="author" content="Team 10">
+        <link rel="stylesheet" href="../css/styles.css" />
 
-    <link rel="stylesheet" href="../css/styles.css">
+        <!-- Just for Testing TODO: remove link to google cdn!-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap"
+            rel="stylesheet"
+        />
+        <script src="../js/general.js"></script>
+        <script src="../js/singleplayer.js"></script>
+    </head>
 
-    <!-- Just for Testing TODO: remove link to google cdn!-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet">
-    <script src="../js/general.js"></script>
-    <script src="../js/singleplayer.js"></script>
-</head>
+    <body>
+        <div id="preloader" class="loader show"></div>
+        <div id="afterloader" class="loader"></div>
 
-<body>
+        <div id="content">
+            <div class="rainbow-wrap">
+                <button
+                    class="nav-button"
+                    id="backButton"
+                    data-target="/web/index.html"
+                >
+                    Back to Menu
+                </button>
+            </div>
 
-    <div id="preloader" class="loader show">
-    </div>
-    <div id="afterloader" class="loader">
-    </div>
-
-    <div id="content">
-        <div class="rainbow-wrap">
-            <button class="nav-button" id="backButton" data-target="/web/index.html">
-                Back to Menu
-            </button>
-        </div>
-
-        <div class="playing-field">
-            <div id="timeline">
-                <ul class="strings">
-                    <li class="string_1"></li>
-                    <li class="string_2"></li>
-                    <li class="string_3"></li>
-                    <li class="string_4"></li>
-                    <li class="string_5"></li>
-                    <li class="string_6"></li>
-                </ul>
-                <div class="notes">
-                    <div id="note_1"></div>
-                    <div id="note_2"></div>
-                    <div id="note_3"></div>
-                    <div id="note_4"></div>
-                    <div id="note_5"></div>
-                    <div id="note_6"></div>
+            <div class="playing-field">
+                <div id="timeline">
+                    <ul class="strings">
+                        <li class="string_1"></li>
+                        <li class="string_2"></li>
+                        <li class="string_3"></li>
+                        <li class="string_4"></li>
+                        <li class="string_5"></li>
+                        <li class="string_6"></li>
+                    </ul>
+                    <div class="notes">
+                        <div id="note_1"></div>
+                        <div id="note_2"></div>
+                        <div id="note_3"></div>
+                        <div id="note_4"></div>
+                        <div id="note_5"></div>
+                        <div id="note_6"></div>
+                    </div>
                 </div>
             </div>
         </div>
-
-    </div>
-</body>
-
+    </body>
 </html>
