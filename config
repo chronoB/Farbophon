@@ -1,4 +1,5 @@
 CamDevice=0
-MidiDevice=1
+MidiOutDevice=3
+MidiInDevice=2
 Threshold=6000000
 DevMode=1

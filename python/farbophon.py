@@ -27,8 +27,8 @@ except Exception:
 # MIDI io initialisieren
 midiOut = midi.MidiOut()
 midiIn = midi.MidiIn()
-midiIn.open_port(0)
-midiOut.open_port(int(config["MidiDevice"]))
+midiIn.open_port(int(config["MidiInDevice"]))
+midiOut.open_port(int(config["MidiOutDevice"]))
 lastNote = 0
 
 
@@ -43,7 +43,10 @@ def playNote(note):
 
 threshold = int(config["Threshold"])
 devMode = bool(int(config["DevMode"]))
-print(devMode)
+
+if devMode:
+    print("## DevMode aktiviert! ##")
+
 count = 0
 colorDict = {
     "red": {
@@ -174,12 +177,13 @@ while cap.isOpened():
     count += 1
     cv2.imshow("Input Video", frame)
 
+    # Midi Input in var schreiben
     midiMessage = midiIn.get_message()
     if midiMessage:
+        # wenn eine Message anliegt
         if midiMessage[0][0] == 0x91:
-            print("noteOn!!")
-        elif midiMessage[0][0] == 0x81:
-            print("noteOFF!!")
+            # note on auf Kanal 2
+            calibrateNow()
 
     key = cv2.waitKey(10)
     if key == 27:
