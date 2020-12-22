@@ -30,7 +30,7 @@ function initialize() {
 		function initializeInputPort(name) {
 			const input = findInputPort(name);
 			if (input) {
-				input.addEventListener('midimessage', onMIDIMessage);
+				input.addEventListener('midimessage', onMIDIMessage2);
 			}
 		}
 
@@ -76,42 +76,47 @@ function initialize() {
 		console.log(event)
 		for (byte of event.data) {
 			string += byte.toString(8) + " ";
+
+			// Darstellung der MIDI-Strings im Textfeld
+			document.getElementById("label").innerHTML = string;
+			document.getElementById("midiNote").innerHTML = event.data[1];
 		}
 		let note = parseInt(event.data[1])
 		console.log(note)
-		if (note === 0) {
-			document.getElementById("label").innerHTML = "blue";
-			soundName = "Right"
-		} else if (note === 1) {
-			document.getElementById("label").innerHTML = "green";
-			soundName = "Left"
-		} else if (note === 2) {
+		if (note === 1) {
 			document.getElementById("label").innerHTML = "red";
-			soundName = "3"
+			soundName = "1"
+		} else if (note === 2) {
+			document.getElementById("label").innerHTML = "green";
+			soundName = "2"
 		} else if (note === 3) {
-			document.getElementById("label").innerHTML = "yellow";
-			soundName = "4"
+			document.getElementById("label").innerHTML = "blue";
+			soundName = "3"
 		} else if (note === 4) {
-			document.getElementById("label").innerHTML = "purple";
+			document.getElementById("label").innerHTML = "cyan";
 			soundName = "4"
 		} else if (note === 5) {
-			document.getElementById("label").innerHTML = "turquoise";
-			soundName = "4"
+			document.getElementById("label").innerHTML = "magenta";
+			soundName = "5"
 		} else if (note === 6) {
-			document.getElementById("label").innerHTML = "off";
+			document.getElementById("label").innerHTML = "yellow";
 			soundName = "6"
+		} else if (note === 7) {
+			document.getElementById("label").innerHTML = "off";
+			soundName = "7"
 		}
 	}
 
 
 
 	function playDrum() {
-		if (soundName.includes("6") || soundName == "") {
+		console.log(soundName);
+		if (soundName.includes("7") || soundName == "") {
 			return
 		} else {
 			console.log(soundName)
 		}
-		fetch("drumsounds/sound" + soundName + ".wav")
+		fetch("drumsounds/" + soundName + ".wav")
 			// Antwort in Array parsen
 			.then(response => response.arrayBuffer())
 			// Array in Buffer Wandeln
