@@ -9,17 +9,17 @@ function onMIDIMessage(event) {
     // event.data[1] = midi note
     // event.data[2] = velocity
     switch (event.data[0]) {
-    case 144:
-        // your function startNote(note, velocity)
-        startNote(event.data[1]);
-        document.getElementById("midiNote").innerHTML = event.data[1] + " ";               // Hier einsetzen mit innerHTML, sodass die Midi-Note angezeigt wird?
-        console.log(event.data[1]) + "erkannt";
-        break;
+        case 144:
+            // your function startNote(note, velocity)
+            startNote(event.data[1])
+            document.getElementById("midiNote").innerHTML = event.data[1] + " " // Hier einsetzen mit innerHTML, sodass die Midi-Note angezeigt wird?
+            break
 
-    case 128:
-        // your function stopNote(note, velocity)
-        stopNote(event.data[1]);
-        document.getElementById("midiNote").innerHTML = " Midi Note";
-        console.log(event.data[1]);
-        //console.log(stopNote);
-        break;
+        case 128:
+            // your function stopNote(note, velocity)
+            stopNote(event.data[1])
+            document.getElementById("midiNote").innerHTML = " Midi Note"
+            //console.log(stopNote);
+            break
+    }
+}

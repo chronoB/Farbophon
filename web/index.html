@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>WebMidi Client</title>
+        <script src="code.js"></script>
+        <!-- <script scr="soundScript.js"></script> -->
+    </head>
 
-<head>
-	<title>WebMidi Client</title>
-	<script src="code.js"></script>
-	<!-- <script scr="soundScript.js"></script> -->
-</head>
-
-<body onload="initialize()">
-	MIDI Input: <select id="inputportselector"></select>
-	<button type="button" id="connectbutton">Öffnen</button><br>
-	incoming message: <span id="label">undefined</span><br>
-	MIDI Note: <span id="midiNote"> none </span><br>
-	<br><br>
-	BPM: <input id="bpm" value="100" type="text">
-	<button type="button" id="bpmButton">Setzen</button><br>
-</body>
-
+    <body onload="initialize()">
+        MIDI Input:
+        <select id="inputportselector"></select>
+        <button type="button" id="connectbutton">Öffnen</button><br />
+        incoming message: <span id="label">undefined</span><br />
+        MIDI Note: <span id="midiNote"> none </span><br />
+        <br /><br />
+        BPM: <input id="bpm" value="100" type="text" />
+        <button type="button" id="bpmButton">Setzen</button><br />
+    </body>
 </html>
