@@ -4,7 +4,7 @@ let ctx
 let cH
 let cW
 let animations = []
-let colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"]
+let colors = ["#ff0000", "#00ff00", "#0000ff", "#00ffff", "#ff00ff", "#ff0000"]
 
 function initTestArea() {
     c = document.getElementById("c")
