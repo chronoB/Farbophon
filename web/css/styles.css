@@ -125,6 +125,12 @@ button {
 /* ------------------------------------------------------------------- */
 /* single player */
 
+#singleplayer {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
 #timeline {
     width: 600px;
     height: 100%;
@@ -250,6 +256,13 @@ button {
 /* ------------------------------------------------------------------- */
 
 /* testarea */
+
+#testarea {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
 canvas {
     display: block;
     position: absolute;
