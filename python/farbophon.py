@@ -27,9 +27,18 @@ except Exception:
 
 # MIDI io initialisieren
 midiOut = midi.MidiOut()
+midiOutPorts = midiOut.get_ports()
+
 midiIn = midi.MidiIn()
-midiIn.open_port(int(config["MidiInDevice"]))
-midiOut.open_port(int(config["MidiOutDevice"]))
+midiInPorts = midiIn.get_ports()
+
+for mip, mop in zip(midiInPorts, midiOutPorts):
+    if mip.startswith(str(config["MidiDevice"])):
+        midiIn.open_port(midiInPorts.index(mip))
+
+    if mop.startswith(str(config["MidiDevice"])):
+        midiOut.open_port(midiOutPorts.index(mop))
+
 lastNote = 0
 
 
