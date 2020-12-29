@@ -3,15 +3,18 @@
     <head>
         <title>WebMidi Client</title>
         <script src="/web/config.js"></script>
+        <script src="/web/midi.js"></script>
         <script src="/web/code.js"></script>
         <!-- <script scr="soundScript.js"></script> -->
     </head>
 
     <body>
-        MIDI Input: <span id="midiDevice">undefined</span><br />
+        MIDI Input: <span id="midiDevice">not defined</span><br />
+        MIDI Message: <span id="midiMessage">undefined</span><br /><br />
 
-        incoming message: <span id="label">undefined</span><br />
         MIDI Note: <span id="midiNote"> none </span><br />
+        Farbe: <span id="color"> none </span><br />
+
         <br /><br />
         BPM: <input id="bpm" value="100" type="text" />
         <button type="button" id="bpmButton">Setzen</button><br />

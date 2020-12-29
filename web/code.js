@@ -6,6 +6,54 @@ let bpm = 100
 
 initMidiDevice()
 
+function onMIDIMessage(event) {
+    let midiDevice = event.currentTarget.name
+    let midiDeviceSpan = document.querySelector("#midiDevice")
+    midiDeviceSpan.innerHTML = midiDevice
+
+    let midiMessage = event.data
+    let midiMessageSpan = document.querySelector("#midiMessage")
+    midiMessageSpan.innerHTML = midiMessage
+
+    let midiNote = parseInt(event.data[1])
+    let midiNoteSpan = document.querySelector("#midiNote")
+    midiNoteSpan.innerHTML = midiNote
+
+    let colorSpan = document.querySelector("#color")
+    let currentColor = ""
+    switch (midiNote) {
+        case 1: {
+            currentColor = "rot"
+            break
+        }
+        case 2: {
+            currentColor = "green"
+            break
+        }
+        case 3: {
+            currentColor = "blue"
+            break
+        }
+        case 4: {
+            currentColor = "cyan"
+            break
+        }
+        case 5: {
+            currentColor = "magenta"
+            break
+        }
+        case 6: {
+            currentColor = "yellow"
+            break
+        }
+        case 7: {
+            currentColor = "Keine Farbe erkannt"
+            break
+        }
+    }
+    colorSpan.innerHTML = currentColor
+}
+
 function initBPM() {
     bpm = parseInt(document.querySelector("#bpm").value)
     playNoteperBPM()
@@ -15,7 +63,7 @@ function playNoteperBPM() {
     window.setTimeout(playNoteperBPM, (1000 / bpm) * 60)
 }
 
-function onMIDIMessage(event) {
+function onMIDIMessageOLD(event) {
     let string = ""
     for (byte of event.data) {
         string += byte.toString(8) + " "
