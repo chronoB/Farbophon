@@ -28,14 +28,14 @@ except Exception:
 # MIDI io initialisieren
 midiOut = midi.MidiOut()
 midiOutPorts = midiOut.get_ports()
-
 midiIn = midi.MidiIn()
 midiInPorts = midiIn.get_ports()
 
-for mip, mop in zip(midiInPorts, midiOutPorts):
+for mip in midiInPorts:
     if mip.startswith(str(config["MidiDevice"])):
         midiIn.open_port(midiInPorts.index(mip))
 
+for mop in midiOutPorts:
     if mop.startswith(str(config["MidiDevice"])):
         midiOut.open_port(midiOutPorts.index(mop))
 
