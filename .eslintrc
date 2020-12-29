@@ -11,7 +11,7 @@
     "rules": {
         "no-undef": "off",
         "no-await-in-loop": "error",
-        "no-console": "error",
+        "no-console": "warn",
         "no-template-curly-in-string": "error",
         "no-unreachable-loop": "warn",
         "array-callback-return": [
