@@ -25,6 +25,8 @@ function startGameAnimation() {
         }
         let time = Math.ceil(new Date().getTime())
         let curNote = song[counter]
+        console.log(curNote)
+        console.log(song)
         if (time - startTime >= curNote.time + preTime) {
             let strCurNote = document.querySelector(".string_" + curNote.note)
             let id = Math.random()
@@ -47,28 +49,4 @@ function startGameAnimation() {
 
 function deleteButton(id) {
     document.querySelector("#" + id).remove()
-}
-
-function readMelodyfile() {
-    fetch("../melodyfiles/odetojoy.json")
-        .then((response) => response.json())
-        .then((json) => {
-            //Translate the json and save it to song
-
-            startGameAnimation()
-        })
-
-    //get melodyfile from folder
-    //file:
-    /*
-    {
-        "100":"1",
-        ...
-    }
-    */
-    //save items in the following structure:
-    /*let song = [
-        { time: 100, note: 1 },
-        ...
-    ]*/
 }
