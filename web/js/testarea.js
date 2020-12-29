@@ -47,8 +47,8 @@ function drawParticles(note) {
         })
         particles.push(particle)
     }
-    let minAnimationTime = 1000
-    let maxAnimationTime = 1000
+    let minAnimationTime = 2500
+    let maxAnimationTime = 2500
     let particlesAnimation = anime({
         targets: particles,
         x: function (particle) {
