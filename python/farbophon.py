@@ -6,6 +6,7 @@ import rtmidi as midi
 
 config = {}
 try:
+    # bei MAC: open("config",... // WIN: open("../config",... (?)
     configFile = open("../config", "rt", encoding="utf-8")
     lines = configFile.readlines()
     for line in lines:
