@@ -1,15 +1,4 @@
-let song = [
-    { time: 5000, note: 1 },
-    { time: 6000, note: 2 },
-    { time: 7000, note: 3 },
-    { time: 8000, note: 4 },
-    { time: 9000, note: 5 },
-    { time: 10000, note: 5 },
-    { time: 11000, note: 4 },
-    { time: 12000, note: 3 },
-    { time: 13000, note: 2 },
-    { time: 14000, note: 1 },
-]
+let song = []
 let wh = 0
 let startTime = 0
 let counter = 0
@@ -20,7 +9,8 @@ document.addEventListener("DOMContentLoaded", initSingleplayer)
 function initSingleplayer() {
     wH = window.outerHeight
     startTime = new Date().getTime()
-    startGameAnimation()
+
+    readMelodyfile()
 }
 
 function evalMidiInput(note) {
@@ -57,4 +47,28 @@ function startGameAnimation() {
 
 function deleteButton(id) {
     document.querySelector("#" + id).remove()
+}
+
+function readMelodyfile() {
+    fetch("../melodyfiles/odetojoy.json")
+        .then((response) => response.json())
+        .then((json) => {
+            //Translate the json and save it to song
+
+            startGameAnimation()
+        })
+
+    //get melodyfile from folder
+    //file:
+    /*
+    {
+        "100":"1",
+        ...
+    }
+    */
+    //save items in the following structure:
+    /*let song = [
+        { time: 100, note: 1 },
+        ...
+    ]*/
 }
