@@ -15,6 +15,8 @@ function initTestArea() {
 }
 
 function evalMidiInput(note) {
+    console.log(note)
+    console.log(colors[note - 1])
     drawParticles(note)
 }
 
@@ -23,8 +25,8 @@ function removeAnimation(animation) {
     if (index > -1) animations.splice(index, 1)
 }
 
-function drawParticles(colorIdx) {
-    let currentColor = colors[colorIdx]
+function drawParticles(note) {
+    let currentColor = colors[note - 1]
     let minRippleSize = 200
     let rippleScale = 0.4
     let rippleSize = Math.min(minRippleSize, cW * rippleScale)

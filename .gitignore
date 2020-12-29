@@ -135,4 +135,5 @@ node_modules/
 config
 
 .idea/
-.vscode/
+
+.vscode
