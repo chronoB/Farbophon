@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", initTestArea)
-let c
-let ctx
-let cH
-let cW
+let c, ctx, cH, cW
 let animations = []
 let colors = ["#ff0000", "#00ff00", "#0000ff", "#00ffff", "#ff00ff", "#ffff00"]
 
