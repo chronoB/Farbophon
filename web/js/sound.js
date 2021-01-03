@@ -1,18 +1,18 @@
 let context = new AudioContext()
 let bpm = 100
-playNoteperBPM()
 
 function playNoteperBPM() {
-    playDrum()
+    playSound(soundname)
     window.setTimeout(playNoteperBPM, (1000 / bpm) * 60)
 }
 
-function playDrum() {
-    if (soundName.includes("7") || soundName === "") {
+function playSound(note) {
+    strNote = String(note)
+    if (strNote.includes("7") || strNote === "") {
         return
     }
 
-    fetch("soundfiles/" + soundName + ".wav")
+    fetch("/web/soundfiles/" + strNote + ".wav")
         // Antwort in Array parsen
         .then((response) => response.arrayBuffer())
         // Array in Buffer Wandeln

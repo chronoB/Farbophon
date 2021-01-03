@@ -47,7 +47,7 @@ function onMIDIMessage(event) {
     if (onOff === 144) {
         let note = event.data[1]
         evalMidiInput(note)
-        //playSound(note)
+        playSound(note)
     } else if (onOff === 128) {
         let note = event.data[1]
         //remove sound
