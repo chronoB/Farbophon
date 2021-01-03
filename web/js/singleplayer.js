@@ -19,15 +19,15 @@ function evalMidiInput(note) {
 
 function startGameAnimation() {
     ret = setInterval(function () {
-        if (counter >= song.length) {
+        let time = Math.ceil(new Date().getTime())
+        let curNote = song[counter]
+        if (curNote.note === -1) {
             clearInterval(ret)
             return
         }
-        let time = Math.ceil(new Date().getTime())
-        let curNote = song[counter]
-        console.log(curNote)
-        console.log(song)
         if (time - startTime >= curNote.time + preTime) {
+            console.log(curNote)
+            console.log(song)
             let strCurNote = document.querySelector(".string_" + curNote.note)
             let id = Math.random()
                 .toString(36)
