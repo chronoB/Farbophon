@@ -4,6 +4,8 @@ let startTime = 0
 let counter = 0
 let preTime = 5000
 
+let score = 0
+
 document.addEventListener("DOMContentLoaded", initSingleplayer)
 
 function initSingleplayer() {
@@ -14,7 +16,9 @@ function initSingleplayer() {
 }
 
 function evalMidiInput(note) {
-    //TODO: implement! Scale corresponding div
+    // Maybe variable that is set to true or false that will be used to get the input or ignore it
+    // TODO: implement! Scale corresponding div
+    // Check if Midi.Input is correct
 }
 
 function startGameAnimation() {
@@ -23,6 +27,7 @@ function startGameAnimation() {
         let curNote = song[counter]
         if (curNote.note === -1) {
             clearInterval(ret)
+            setHighscore()
             return
         }
         if (time - startTime >= curNote.time + preTime) {
@@ -49,4 +54,9 @@ function startGameAnimation() {
 
 function deleteButton(id) {
     document.querySelector("#" + id).remove()
+}
+
+function setHighscore() {
+    //TODO: Get score and set it with the communication.js functions
+    //the score will be tracked in the evalMidiInput function
 }
