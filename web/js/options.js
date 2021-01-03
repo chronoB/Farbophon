@@ -1,28 +1,25 @@
 document.addEventListener("DOMContentLoaded", showConfig)
 
 function showConfig() {
-    fetch("/config")
-        .then((response) => response.text())
-        .then((data) => {
-            let lines = data.split("\r\n")
-            lines.forEach((line) => {
-                let parts = line.split("=")
-                if (parts[0] === "CamDevice") {
-                    document.querySelector("#curCamDevice").innerText = parts[1]
-                }
-                if (parts[0] === "Threshold") {
-                    document.querySelector("#curThreshold").innerText = parts[1]
-                }
-                if (parts[0] === "API-Key") {
-                    document.querySelector("#curApiKey").innerText = parts[1]
-                }
-                if (parts[0] === "MidiDevice") {
-                    document.querySelector("#curMidiController").innerText =
-                        parts[1]
-                }
-                if (parts[0] === "Server-URI") {
-                    document.querySelector("#curServerURI").innerText = parts[1]
-                }
-            })
-        })
+    Object.keys(sessionStorage).forEach(function (key) {
+        if (key === "IsThisFirstTime_Log_From_LiveServer") {
+            //remove unwanted output from liveserver extension from vscode
+            return
+        }
+        value = sessionStorage.getItem(key)
+        container = document.createElement("div")
+        container.className = "config-container"
+        configDiv = document.createElement("div")
+        label = document.createElement("label")
+        label.setAttribute("for", key)
+        label.innerText = key + ":"
+        p = document.createElement("p")
+        p.setAttribute("id", key)
+        p.innerText = value
+
+        configDiv.appendChild(label)
+        configDiv.appendChild(p)
+        container.appendChild(configDiv)
+        document.querySelector(".rainbow-wrap").appendChild(container)
+    })
 }

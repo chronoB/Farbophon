@@ -49,6 +49,10 @@ function getConfiguration() {
                 //split the configuration in two parts
                 //identifier=value
                 let parts = line.split("=")
+                if (parts[1] === undefined) {
+                    //return on last line
+                    return
+                }
                 //save the configuration in the sessionStorage
                 sessionStorage.setItem(
                     parts[identifierIndex],
