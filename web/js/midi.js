@@ -5,7 +5,7 @@ function initMidiDevice() {
         navigator.requestMIDIAccess().then(connectMidiDevice, errorHandler)
     } else {
         console.log(
-            "Es gibt einen Fehler beim Zugriff auf MIDI. Bist du etwa nicht in einer secure environment (https)?"
+            "Es gibt einen Fehler beim Zugriff auf MIDI. Bist du etwa nicht in einer secure environment (https)? Versuche es bitte in Chrome"
         )
     }
 }

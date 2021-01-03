@@ -12,8 +12,6 @@ function initTestArea() {
 }
 
 function evalMidiInput(note) {
-    console.log(note)
-    console.log(colors[note - 1])
     drawParticles(note)
 }
 
