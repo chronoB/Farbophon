@@ -13,16 +13,18 @@ function initMidiDevice() {
 function connectMidiDevice(midi) {
     // lese alle MIDI Inputs
     midi.inputs.forEach(function (device) {
-        console.log(device)
-        console.log(sessionStorage.getItem("MidiDevice"))
         // wenn Name von einem Input mit dem aus der config übereinstimmt
-        if (device.name == sessionStorage.getItem("MidiDevice")) {
-            console.log(device.name, "wird geöffnet..")
+        if (device.name.includes(sessionStorage.getItem("MidiDevice"))) {
             // eventlistener für MIDI Noten hinzufügen
             device.addEventListener("midimessage", onMIDIMessage)
-            console.log(
-                device.name,
-                "EventListener *onMidiMessage* angebamselt"
+        } else {
+            console.error(
+                "Configured device not found in possible midi inputs:"
+            )
+            console.error("Name of the internal device: " + device.name)
+            console.error(
+                "Device in the config file: " +
+                    sessionStorage.getItem("MidiDevice")
             )
         }
     })
