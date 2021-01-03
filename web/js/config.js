@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", getConfiguration)
 function getConfiguration() {
     let identifierIndex = 0
     let valueIndex = 1
@@ -18,5 +19,6 @@ function getConfiguration() {
                     parts[valueIndex]
                 )
             })
+            const DEV_MODE = parseInt(sessionStorage.getItem("DevMode"))
         })
 }

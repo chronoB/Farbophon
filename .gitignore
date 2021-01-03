@@ -133,3 +133,7 @@ dmypy.json
 node_modules/
 
 config
+
+.idea/
+
+.vscode
