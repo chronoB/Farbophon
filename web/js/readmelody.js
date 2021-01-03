@@ -1,5 +1,5 @@
 function readMelodyfile() {
-    fetch("../melodyfiles/lv01.csv")
+    fetch("/web/melodyfiles/" + sessionStorage.getItem("melodyFile"))
         .then((response) => response.text())
         .then((textmelody) => {
             //Translate the csv and save it to song
