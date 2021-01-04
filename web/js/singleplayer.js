@@ -6,6 +6,7 @@ let preTime = 5000
 
 let score = 0
 
+let curMidiNote
 let strMidiNote
 
 document.addEventListener("DOMContentLoaded", initSingleplayer)
@@ -21,8 +22,8 @@ function evalMidiInput(note) {
     // Maybe variable that is set to true or false that will be used to get the input or ignore it
     // TODO: implement! Scale corresponding div
     // Check if Midi.Input is correct
-
-    scaleMidiNote(note)
+    curMidiNote = note
+    scaleMidiNote()
 }
 
 function startGameAnimation() {
@@ -35,6 +36,9 @@ function startGameAnimation() {
             return
         }
         if (time - startTime >= curNote.time + preTime) {
+            window.setTimeout(() => {
+                updateScore(curNote)
+            }, 5000)
             console.log(curNote)
             console.log(song)
             let strCurNote = document.querySelector(".string_" + curNote.note)
@@ -65,10 +69,21 @@ function setHighscore() {
     //the score will be tracked in the evalMidiInput function
 }
 
-function scaleMidiNote(note) {
+function scaleMidiNote() {
     if (strMidiNote !== undefined) strMidiNote.style.transform = "scale(1.0)"
-    if (note === 7) return
-    strMidiNote = document.querySelector("#note_" + note)
+    if (curMidiNote === 7) return
+    strMidiNote = document.querySelector("#note_" + curMidiNote)
     console.log(strMidiNote)
     strMidiNote.style.transform = "scale(1.2)"
+}
+
+function updateScore(curNote) {
+    if (curMidiNote === curNote.note) score++
+    else score--
+    displayScore()
+}
+
+function displayScore() {
+    let scoreEl = document.querySelector("#score")
+    scoreEl.innerText = score
 }
