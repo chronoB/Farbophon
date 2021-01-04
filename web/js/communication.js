@@ -42,6 +42,7 @@ function login(user, password) {
     ).then((request) => {
         return request.json().then((data) => {
             sessionStorage.setItem("Server-Token", data.token)
+            sessionStorage.setItem("user", user)
             return data
         })
     })

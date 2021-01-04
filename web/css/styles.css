@@ -252,6 +252,47 @@ button {
 #timeline .notes div.played {
     transform: scale(1.2);
 }
+
+/* highscore */
+
+#highscore-screen {
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    color: white;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#highscore-screen #login {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+#highscore-screen #login input {
+    text-align: center;
+}
+
+#highscores {
+    margin-top: 2em;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+#highscores > div {
+    display: flex;
+    justify-content: space-between;
+}
+#highscores > div > span {
+    margin-bottom: 5px;
+}
+
 /* end single player */
 /* ------------------------------------------------------------------- */
 

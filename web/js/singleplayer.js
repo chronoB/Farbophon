@@ -32,15 +32,13 @@ function startGameAnimation() {
         let curNote = song[counter]
         if (curNote.note === -1) {
             clearInterval(ret)
-            setHighscore()
+            window.setTimeout(activateHighscoreOverlay, 6000)
             return
         }
         if (time - startTime >= curNote.time + preTime) {
             window.setTimeout(() => {
                 updateScore(curNote)
             }, 5000)
-            console.log(curNote)
-            console.log(song)
             let strCurNote = document.querySelector(".string_" + curNote.note)
             let id = Math.random()
                 .toString(36)
@@ -64,16 +62,10 @@ function deleteButton(id) {
     document.querySelector("#" + id).remove()
 }
 
-function setHighscore() {
-    //TODO: Get score and set it with the communication.js functions
-    //the score will be tracked in the evalMidiInput function
-}
-
 function scaleMidiNote() {
     if (strMidiNote !== undefined) strMidiNote.style.transform = "scale(1.0)"
     if (curMidiNote === 7) return
     strMidiNote = document.querySelector("#note_" + curMidiNote)
-    console.log(strMidiNote)
     strMidiNote.style.transform = "scale(1.2)"
 }
 
@@ -86,4 +78,76 @@ function updateScore(curNote) {
 function displayScore() {
     let scoreEl = document.querySelector("#score")
     scoreEl.innerText = score
+}
+
+/*highscore*/
+
+function activateHighscoreOverlay() {
+    document.querySelector("#highscore-screen").style.display = "flex"
+    document.querySelector("#userscore").innerText = score
+    if (sessionStorage.getItem("Server-Token")) {
+        document.querySelector("#login").style.display = "none"
+    }
+    updateHighscore()
+}
+function processHighscore() {
+    if (!sessionStorage.getItem("Server-Token")) {
+        let user = document.querySelector("#username-input").value
+        let pw = document.querySelector("#password").value
+        if (document.querySelector("#should-register").checked) {
+            register(user, pw)
+                .then((data) => {
+                    login(user, pw)
+                })
+                .then((data) => {
+                    _sendHighscore(data)
+                })
+        } else {
+            login(user, pw).then((data) => {
+                _sendHighscore(data)
+            })
+        }
+    } else {
+        _sendHighscore("OK")
+    }
+}
+
+function _sendHighscore(data) {
+    if (data === undefined) {
+        //login failed
+        return
+    }
+    sendHighscore(sessionStorage.getItem("user"), score).then(() => {
+        updateHighscore()
+        document.querySelector("#login-button").setAttribute("disabled", "")
+        document.querySelector("#login-button").style.opacity = 0.5
+    })
+}
+
+function updateHighscore() {
+    getHighscore().then((data) => {
+        document.querySelector("#highscores").innerHTML = ""
+
+        let div = document.createElement("div")
+        let pName = document.createElement("p")
+        let pScore = document.createElement("p")
+        pName.innerText = "Name"
+        pScore.innerText = "Punktzahl"
+        div.appendChild(pName)
+        div.appendChild(pScore)
+        document.querySelector("#highscores").appendChild(div)
+
+        data.highscore.forEach((el) => {
+            div = document.createElement("div")
+            pName = document.createElement("span")
+            pScore = document.createElement("span")
+
+            pName.innerText = el.name
+            pScore.innerText = el.score
+
+            div.appendChild(pName)
+            div.appendChild(pScore)
+            document.querySelector("#highscores").appendChild(div)
+        })
+    })
 }
