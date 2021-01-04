@@ -83,6 +83,7 @@ function displayScore() {
 /*highscore*/
 
 function activateHighscoreOverlay() {
+    midiDevice.removeEventListener("midimessage", onMIDIMessage)
     document.querySelector("#highscore-screen").style.display = "flex"
     document.querySelector("#userscore").innerText = score
     if (sessionStorage.getItem("Server-Token")) {
