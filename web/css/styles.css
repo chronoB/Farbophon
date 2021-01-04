@@ -19,7 +19,7 @@ body {
 }
 
 #content {
-    background: url("https://images.alphacoders.com/671/thumb-1920-671836.jpg");
+    background: url("/web/assets/background.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     padding: 10%;
@@ -255,6 +255,36 @@ button {
 /* end single player */
 /* ------------------------------------------------------------------- */
 
+/* melody select*/
+
+#singleplayer_melody_select {
+    display: flex;
+    flex-direction: column;
+}
+
+#singleplayer_melody_select .rainbow-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+#singleplayer_melody_select select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    /* ... */
+    width: 100%;
+    -moz-padding-start: -3px;
+    background: url(000000-0.png) repeat;
+    font-family: "New Rocker", monospace;
+    font-size: 16px;
+    scrollbar-width: none;
+}
+#singleplayer_melody_select select option {
+    text-align: center;
+}
+/* end melody select */
+/* ------------------------------------------------------------------- */
 /* testarea */
 
 canvas {
@@ -263,3 +293,6 @@ canvas {
     width: 100vw;
     height: 100vh;
 }
+
+/* end testarea */
+/* ------------------------------------------------------------------- */
