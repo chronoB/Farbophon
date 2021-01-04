@@ -45,6 +45,7 @@ function getConfiguration() {
             //split every line into a new object.
             //every line of the config file is a new config object
             let lines = data.split("\r\n")
+            lines = lines.split("\n")
             lines.forEach((line) => {
                 //split the configuration in two parts
                 //identifier=value
