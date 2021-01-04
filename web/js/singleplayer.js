@@ -6,6 +6,8 @@ let preTime = 5000
 
 let score = 0
 
+let strMidiNote
+
 document.addEventListener("DOMContentLoaded", initSingleplayer)
 
 function initSingleplayer() {
@@ -19,6 +21,8 @@ function evalMidiInput(note) {
     // Maybe variable that is set to true or false that will be used to get the input or ignore it
     // TODO: implement! Scale corresponding div
     // Check if Midi.Input is correct
+
+    scaleMidiNote(note)
 }
 
 function startGameAnimation() {
@@ -59,4 +63,12 @@ function deleteButton(id) {
 function setHighscore() {
     //TODO: Get score and set it with the communication.js functions
     //the score will be tracked in the evalMidiInput function
+}
+
+function scaleMidiNote(note) {
+    if (strMidiNote !== undefined) strMidiNote.style.transform = "scale(1.0)"
+    if (note === 7) return
+    strMidiNote = document.querySelector("#note_" + note)
+    console.log(strMidiNote)
+    strMidiNote.style.transform = "scale(1.2)"
 }
