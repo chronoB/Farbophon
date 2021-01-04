@@ -283,6 +283,9 @@ button {
 #singleplayer_melody_select select option {
     text-align: center;
 }
+#singleplayer_melody_select select::-webkit-scrollbar {
+    display: none;
+}
 /* end melody select */
 /* ------------------------------------------------------------------- */
 /* testarea */
