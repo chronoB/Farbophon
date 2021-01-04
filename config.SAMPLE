@@ -1,4 +1,6 @@
 CamDevice=0
 MidiDevice=LoopBe Internal MIDI
 Threshold=6000000
+API-Key=xxx
+Server-URI=http://xxx:5253
 DevMode=0
