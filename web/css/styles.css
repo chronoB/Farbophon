@@ -19,7 +19,7 @@ body {
 }
 
 #content {
-    background: url("https://images.alphacoders.com/671/thumb-1920-671836.jpg");
+    background: url("/web/assets/background.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     padding: 10%;
