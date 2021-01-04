@@ -136,7 +136,7 @@ config
 .idea/
 
 .vscode
-=======
+
 .idea/
 
 color_picker/config
