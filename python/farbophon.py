@@ -45,10 +45,13 @@ lastNote = 0
 def playNote(note):
     global lastNote
     if lastNote != note:
-        print(note)
+        print("Note Off:", lastNote)
+        midiOut.send_message([0x80, note, 0])
+        print("Note On:", note)
+        print("")
         midiOut.send_message([0x90, note, 127])
         time.sleep(.10)
-        midiOut.send_message([0x80, note, 0])
+
         lastNote = note
 
 

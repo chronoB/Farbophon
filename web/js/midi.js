@@ -44,11 +44,14 @@ function errorHandler(error) {
 function onMIDIMessage(event) {
     console.log(event.data)
     onOff = event.data[0]
+
     if (onOff === 144) {
+        // Note on
         let note = event.data[1]
         evalMidiInput(note)
         playSound(note)
     } else if (onOff === 128) {
+        // Note off
         let note = event.data[1]
         //remove sound
     }
