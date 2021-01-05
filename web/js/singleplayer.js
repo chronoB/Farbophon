@@ -115,7 +115,7 @@ function processHighscore() {
 
 function _sendHighscore(data) {
     if (data === undefined) {
-        //login failed
+        //TODO: output to user that login has failed
         return
     }
     sendHighscore(sessionStorage.getItem("user"), score).then(() => {
