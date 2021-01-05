@@ -1,4 +1,5 @@
 lv01.csv
+lv01copy.csv
 lv02.csv
 lv03.csv
 odetojoy.csv

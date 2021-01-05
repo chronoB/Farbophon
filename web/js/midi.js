@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", initMidiDevice)
 
+let midiDevice
+
 function initMidiDevice() {
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(connectMidiDevice, errorHandler)
@@ -16,8 +18,11 @@ function connectMidiDevice(midi) {
         // wenn Name von einem Input mit dem aus der config übereinstimmt
         if (device.name.includes(sessionStorage.getItem("MidiDevice"))) {
             // eventlistener für MIDI Noten hinzufügen
-            device.addEventListener("midimessage", onMIDIMessage)
+            midiDevice = device
+            midiDevice.addEventListener("midimessage", onMIDIMessage)
         } else {
+            //TODO: This should only be displayed if really no input is found.
+            //not on every input that is not the desired input
             console.error(
                 "Configured device not found in possible midi inputs:"
             )

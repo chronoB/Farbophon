@@ -21,11 +21,49 @@
         <script src="/web/js/sound.js"></script>
         <script src="/web/js/singleplayer.js"></script>
         <script src="/web/js/readmelody.js"></script>
+        <script src="/web/js/communication.js"></script>
     </head>
 
     <body>
         <div id="preloader" class="loader show"></div>
         <div id="afterloader" class="loader"></div>
+
+        <div id="highscore-screen">
+            <div id="text">
+                <p>
+                    Glückwunsch, du hast <span id="userscore"></span> Punkte
+                    erreicht.
+                </p>
+                <p>
+                    Speichere deinen Highscore online und vergleiche dich mit
+                    den anderen Spieler*Innen!
+                </p>
+            </div>
+            <div id="login">
+                <label for="username-input"> Benutzername: </label>
+                <input type="text" id="username-input" />
+                <label for="password"> Passwort: </label>
+                <input type="password" id="password" />
+                <label for="should-register"> Neuen Benutzer anlegen? </label>
+                <input type="checkbox" id="should-register" />
+            </div>
+            <button id="login-button" onclick="processHighscore()">
+                Highscore abschicken
+            </button>
+            <div id="highscores">
+                <div>
+                    <p>Name</p>
+                    <p>Punktzahl</p>
+                </div>
+            </div>
+            <button
+                class="nav-button"
+                id="backButton"
+                data-target="/web/index.html"
+            >
+                Back to Menu
+            </button>
+        </div>
 
         <div id="content">
             <div id="singleplayer">
@@ -37,6 +75,11 @@
                     >
                         Back to Menu
                     </button>
+                </div>
+                <div class="rainbow-wrap">
+                    <div id="scoreboard">
+                        <p>Score: <span id="score"></span></p>
+                    </div>
                 </div>
 
                 <div class="playing-field">
