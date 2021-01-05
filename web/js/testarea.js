@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", initTestArea)
+
 let c, ctx, cH, cW
 let animations = []
 let colors = ["#ff0000", "#00ff00", "#0000ff", "#00ffff", "#ff00ff", "#ffff00"]
@@ -9,6 +10,9 @@ function initTestArea() {
 
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
+    document
+        .querySelector("#playAlongButton")
+        .addEventListener("click", playBackTrack)
 }
 
 function evalMidiInput(note) {

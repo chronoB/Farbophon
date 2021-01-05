@@ -39,8 +39,20 @@
             </div>
             <br />
             <div class="rainbow-wrap">
-                <button id="playAlongButton">PlayAlong! (let op)</button>
+                <div id="playAlongWrapper">
+                    <button id="playAlongButton">PlayAlong! (let op)</button>
+                    <div>Volume</div>
+                    <input
+                        type="range"
+                        id="backgroundTrackVolume"
+                        min="0"
+                        max="100"
+                        step="1"
+                        value="100"
+                    />
+                </div>
             </div>
+
             <canvas id="c"></canvas>
         </div>
     </body>
