@@ -340,3 +340,26 @@ canvas {
 
 /* end testarea */
 /* ------------------------------------------------------------------- */
+
+/* calibration */
+
+#calibration {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+#calibration .rainbow-wrap {
+    margin: auto;
+}
+#calibration-overlay {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+#calibration-overlay #overlay-countdown-p {
+    font-size: 5rem;
+    margin-top: 1rem;
+}
+
+/* end calibration */
+/* ------------------------------------------------------------------- */
