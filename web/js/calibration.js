@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", initCalibration)
 
 function initCalibration() {
-    document
-        .querySelector("#calibration-button")
-        .addEventListener("click", (event) => startCalibration(event))
+    let calButton = document.querySelector("#calibration-button")
+
+    calButton.addEventListener("click", (event) => startCalibration(event))
+
+    if (document.referrer.includes("singleplayerMelodySelect.html")) {
+        calButton.setAttribute("data-target", "/web/html/singleplayer.html")
+    } else if (document.referrer.includes("index.html")) {
+        calButton.setAttribute("data-target", "/web/html/testarea.html")
+    }
 }
 function startCalibration(event) {
     //set display
