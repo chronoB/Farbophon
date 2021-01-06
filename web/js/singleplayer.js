@@ -118,7 +118,11 @@ function _sendHighscore(data) {
         //TODO: output to user that login has failed
         return
     }
-    sendHighscore(sessionStorage.getItem("user"), score).then(() => {
+    sendHighscore(
+        sessionStorage.getItem("user"),
+        score,
+        sessionStorage.getItem("melodyFile")
+    ).then(() => {
         updateHighscore()
         document.querySelector("#login-button").setAttribute("disabled", "")
         document.querySelector("#login-button").style.opacity = 0.5
@@ -126,7 +130,7 @@ function _sendHighscore(data) {
 }
 
 function updateHighscore() {
-    getHighscore().then((data) => {
+    getHighscore(sessionStorage.getItem("melodyFile")).then((data) => {
         document.querySelector("#highscores").innerHTML = ""
 
         let div = document.createElement("div")
