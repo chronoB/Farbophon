@@ -10,9 +10,17 @@ function initTestArea() {
 
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
+
+    // Adding ClickListener to PlayAlong Button on Testarea page
     document
         .querySelector("#playAlongButton")
         .addEventListener("click", playBackTrack)
+
+    // Adding InputListener to VolumeSlider
+    // to change Volume of PlayBackTrack
+    document
+        .querySelector("#backgroundTrackVolume")
+        .addEventListener("input", updateBackTrackVol)
 }
 
 function evalMidiInput(note) {
