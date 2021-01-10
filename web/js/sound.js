@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", initSound)
 
-let context, sourceBufferNode
+let context, sourceBufferNode, playBackBufferNode, playBackGainNode
 
 function initSound() {
     context = new AudioContext()
+    playBackGainNode = context.createGain()
 }
 
 function playSound(note) {
@@ -27,4 +28,29 @@ function playSound(note) {
             sourceBufferNode.connect(context.destination)
             sourceBufferNode.start(context.currentTime)
         })
+}
+
+function playBackTrack(playBack, soundName) {
+    if (!playBack) {
+        fetch("/web/soundfiles/BackTrack" + soundName + ".mp3")
+            // Antwort in Array parsen
+            .then((response) => response.arrayBuffer())
+            // Array in Buffer Wandeln
+            .then((undecodedAudio) => context.decodeAudioData(undecodedAudio))
+            // Buffer in SourceBufferNode wandeln und abspielen
+            .then((audioBuffer) => {
+                playBackBufferNode = context.createBufferSource()
+                playBackBufferNode.buffer = audioBuffer
+                playBackBufferNode.connect(playBackGainNode)
+                playBackGainNode.connect(context.destination)
+                playBackBufferNode.start(context.currentTime)
+            })
+    } else {
+        playBackBufferNode.stop()
+    }
+}
+
+function updateBackTrackVol(e) {
+    let gain = e.target.value / 100
+    playBackGainNode.gain.value = gain
 }

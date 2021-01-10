@@ -338,6 +338,18 @@ canvas {
     height: 100vh;
 }
 
+#playAlongWrapper {
+    text-align: center;
+}
+
+#playAlongButton {
+    width: 100%;
+}
+
+#backgroundTrackVolume {
+    z-index: 2;
+}
+
 /* end testarea */
 /* ------------------------------------------------------------------- */
 
@@ -363,3 +375,4 @@ canvas {
 
 /* end calibration */
 /* ------------------------------------------------------------------- */
+
