@@ -1,5 +1,4 @@
 let song = []
-let wh = 0
 let startTime = 0
 let counter = 0
 let preTime = 5000
@@ -12,7 +11,6 @@ let strMidiNote
 document.addEventListener("DOMContentLoaded", initSingleplayer)
 
 function initSingleplayer() {
-    wH = window.outerHeight
     startTime = new Date().getTime()
 
     readMelodyfile()
