@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", initTestArea)
 let c, ctx, cH, cW
 let animations = []
 let colors = ["#ff0000", "#00ff00", "#0000ff", "#00ffff", "#ff00ff", "#ffff00"]
+let playBack
 
 function playAlongTrigger(e) {
     let playBackButton = e.target
@@ -11,11 +12,11 @@ function playAlongTrigger(e) {
         "input[name=playAlongSelector]:checked"
     ).value
     if (!playBack) {
-        playBackTrack(soundName)
+        playBackTrack(playBack, soundName)
         playBackButton.setAttribute("data-play", "1")
         playBackButton.innerText = "Stop it!"
     } else {
-        playBackTrack()
+        playBackTrack(playBack)
         playBackButton.innerText = "PlayAlong!"
         playBackButton.setAttribute("data-play", "0")
     }

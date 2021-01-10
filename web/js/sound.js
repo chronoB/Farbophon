@@ -30,7 +30,7 @@ function playSound(note) {
         })
 }
 
-function playBackTrack(soundName) {
+function playBackTrack(playBack, soundName) {
     if (!playBack) {
         fetch("/web/soundfiles/BackTrack" + soundName + ".mp3")
             // Antwort in Array parsen
@@ -44,11 +44,9 @@ function playBackTrack(soundName) {
                 playBackBufferNode.connect(playBackGainNode)
                 playBackGainNode.connect(context.destination)
                 playBackBufferNode.start(context.currentTime)
-                playBack = true
             })
     } else {
         playBackBufferNode.stop()
-        playBack = false
     }
 }
 
