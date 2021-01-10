@@ -18,9 +18,9 @@
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/1.0.0/anime.min.js"></script>
         <script src="/web/js/general.js"></script>
+        <script src="/web/js/sound.js"></script>
         <script src="/web/js/testarea.js"></script>
         <script src="/web/js/midi.js"></script>
-        <script src="/web/js/sound.js"></script>
     </head>
 
     <body>
@@ -37,6 +37,37 @@
                     Back to Menu
                 </button>
             </div>
+            <br />
+            <div class="rainbow-wrap">
+                <div id="playAlongWrapper">
+                    <button id="playAlongButton" data-play="0">
+                        PlayAlong!
+                    </button>
+                    <div>
+                        <input
+                            type="radio"
+                            name="playAlongSelector"
+                            value="1"
+                            checked
+                        />BackTrack 1
+                        <input
+                            type="radio"
+                            name="playAlongSelector"
+                            value="2"
+                        />BackTrack 2
+                    </div>
+                    <div>Volume</div>
+                    <input
+                        type="range"
+                        id="backgroundTrackVolume"
+                        min="0"
+                        max="100"
+                        step="1"
+                        value="100"
+                    />
+                </div>
+            </div>
+
             <canvas id="c"></canvas>
         </div>
     </body>

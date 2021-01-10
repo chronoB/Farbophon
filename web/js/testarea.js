@@ -1,7 +1,26 @@
 document.addEventListener("DOMContentLoaded", initTestArea)
+
 let c, ctx, cH, cW
 let animations = []
 let colors = ["#ff0000", "#00ff00", "#0000ff", "#00ffff", "#ff00ff", "#ffff00"]
+let playBack
+
+function playAlongTrigger(e) {
+    let playBackButton = e.target
+    playBack = parseInt(playBackButton.getAttribute("data-play"))
+    let soundName = document.querySelector(
+        "input[name=playAlongSelector]:checked"
+    ).value
+    if (!playBack) {
+        playBackTrack(playBack, soundName)
+        playBackButton.setAttribute("data-play", "1")
+        playBackButton.innerText = "Stop it!"
+    } else {
+        playBackTrack(playBack)
+        playBackButton.innerText = "PlayAlong!"
+        playBackButton.setAttribute("data-play", "0")
+    }
+}
 
 function initTestArea() {
     c = document.getElementById("c")
@@ -9,6 +28,17 @@ function initTestArea() {
 
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
+
+    // Adding ClickListener to PlayAlong Button on Testarea page
+    document
+        .querySelector("#playAlongButton")
+        .addEventListener("click", playAlongTrigger)
+
+    // Adding InputListener to VolumeSlider
+    // to change Volume of PlayBackTrack
+    document
+        .querySelector("#backgroundTrackVolume")
+        .addEventListener("input", updateBackTrackVol)
 }
 
 function evalMidiInput(note) {
