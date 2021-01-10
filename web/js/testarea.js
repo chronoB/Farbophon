@@ -4,6 +4,23 @@ let c, ctx, cH, cW
 let animations = []
 let colors = ["#ff0000", "#00ff00", "#0000ff", "#00ffff", "#ff00ff", "#ffff00"]
 
+function playAlongTrigger(e) {
+    let playBackButton = e.target
+    playBack = parseInt(playBackButton.getAttribute("data-play"))
+    let soundName = document.querySelector(
+        "input[name=playAlongSelector]:checked"
+    ).value
+    if (!playBack) {
+        playBackTrack(soundName)
+        playBackButton.setAttribute("data-play", "1")
+        playBackButton.innerText = "Stop it!"
+    } else {
+        playBackTrack()
+        playBackButton.innerText = "PlayAlong!"
+        playBackButton.setAttribute("data-play", "0")
+    }
+}
+
 function initTestArea() {
     c = document.getElementById("c")
     ctx = c.getContext("2d")
@@ -14,7 +31,7 @@ function initTestArea() {
     // Adding ClickListener to PlayAlong Button on Testarea page
     document
         .querySelector("#playAlongButton")
-        .addEventListener("click", playBackTrack)
+        .addEventListener("click", playAlongTrigger)
 
     // Adding InputListener to VolumeSlider
     // to change Volume of PlayBackTrack

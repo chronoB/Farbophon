@@ -30,9 +30,9 @@ function playSound(note) {
         })
 }
 
-function playBackTrack(e) {
+function playBackTrack(soundName) {
     if (!playBack) {
-        fetch("/web/soundfiles/FS_bg_metronom.mp3")
+        fetch("/web/soundfiles/BackTrack" + soundName + ".mp3")
             // Antwort in Array parsen
             .then((response) => response.arrayBuffer())
             // Array in Buffer Wandeln
@@ -46,11 +46,9 @@ function playBackTrack(e) {
                 playBackBufferNode.start(context.currentTime)
                 playBack = true
             })
-        e.target.innerText = "Stop it!"
     } else {
         playBackBufferNode.stop()
         playBack = false
-        e.target.innerText = "PlayAlong!"
     }
 }
 
