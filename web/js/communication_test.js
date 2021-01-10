@@ -42,15 +42,17 @@ function triggerHighscore(event) {
 
     let user = document.querySelector("#nameInput").value
     let score = document.querySelector("#scoreInput").value
+    let song = document.querySelector("#songInput").value
 
-    sendHighscore(user, score).then((data) => {
+    sendHighscore(user, score, song).then((data) => {
         document.querySelector("#outputText").innerHTML = JSON.stringify(data)
     })
 }
 
 function showHighscore(event) {
     event.preventDefault()
-    getHighscore().then((data) => {
+    let song = document.querySelector("#songInput").value
+    getHighscore(song).then((data) => {
         document.querySelector("#outputText").innerHTML = JSON.stringify(data)
     })
 }

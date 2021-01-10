@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Farbophon</title>
+        <meta name="description" content="Farbophon" />
+        <meta name="author" content="Team 10" />
+
+        <link rel="stylesheet" href="/web/css/styles.css" />
+
+        <!-- Just for Testing TODO: remove link to google cdn!-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap"
+            rel="stylesheet"
+        />
+        <script src="/web/js/general.js"></script>
+        <script src="/web/js/midi.js"></script>
+        <script src="/web/js/calibration.js"></script>
+    </head>
+
+    <body>
+        <div id="preloader" class="loader show"></div>
+        <div id="afterloader" class="loader"></div>
+
+        <div id="content">
+            <div id="calibration">
+                <div id="calibration-text">
+                    <p>
+                        Damit die Erkennung der genutzten Farben verbessert
+                        wird, führen wir gleich eine Kalibrierung durch. Stellen
+                        sie sich dafür so auf, wie sie gleich beim Spiel stehen
+                        werden. Klicken sie anschließend auf die "Start"-Taste.
+                    </p>
+                </div>
+
+                <div class="rainbow-wrap">
+                    <button id="calibration-button" data-target="">
+                        Start
+                    </button>
+                </div>
+            </div>
+            <div id="calibration-overlay">
+                <div id="overlay-text">
+                    <p id="overlay-text-p">Kalibrierung in:</p>
+                </div>
+                <div id="overlay-countdown">
+                    <p id="overlay-countdown-p">3</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

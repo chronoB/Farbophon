@@ -1,17 +1,17 @@
-let context = new AudioContext()
-let bpm = 100
+document.addEventListener("DOMContentLoaded", initSound)
 
-let playBackBufferNode
-let playBackGainNode = context.createGain()
-let playBack = false
+let context, sourceBufferNode, playBackBufferNode, playBackGainNode
 
-function playNoteperBPM() {
-    playSound(soundname)
-    window.setTimeout(playNoteperBPM, (1000 / bpm) * 60)
+function initSound() {
+    context = new AudioContext()
+    playBackGainNode = context.createGain()
 }
 
 function playSound(note) {
     strNote = String(note)
+    //stop current sound
+    if (sourceBufferNode !== undefined)
+        sourceBufferNode.stop(context.currentTime)
     if (strNote.includes("7") || strNote === "") {
         return
     }
@@ -23,7 +23,7 @@ function playSound(note) {
         .then((undecodedAudio) => context.decodeAudioData(undecodedAudio))
         // Buffer in SourceBufferNode wandeln und abspielen
         .then((audioBuffer) => {
-            let sourceBufferNode = context.createBufferSource()
+            sourceBufferNode = context.createBufferSource()
             sourceBufferNode.buffer = audioBuffer
             sourceBufferNode.connect(context.destination)
             sourceBufferNode.start(context.currentTime)

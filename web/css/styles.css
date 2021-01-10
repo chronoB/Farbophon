@@ -19,7 +19,7 @@ body {
 }
 
 #content {
-    background: url("https://images.alphacoders.com/671/thumb-1920-671836.jpg");
+    background: url("/web/assets/background.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     padding: 10%;
@@ -252,9 +252,83 @@ button {
 #timeline .notes div.played {
     transform: scale(1.2);
 }
+
+/* highscore */
+
+#highscore-screen {
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    color: white;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#highscore-screen #login {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+#highscore-screen #login input {
+    text-align: center;
+}
+
+#highscores {
+    margin-top: 2em;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+#highscores > div {
+    display: flex;
+    justify-content: space-between;
+}
+#highscores > div > span {
+    margin-bottom: 5px;
+}
+
 /* end single player */
 /* ------------------------------------------------------------------- */
 
+/* melody select*/
+
+#singleplayer_melody_select {
+    display: flex;
+    flex-direction: column;
+}
+
+#singleplayer_melody_select .rainbow-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+#singleplayer_melody_select select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    /* ... */
+    width: 100%;
+    -moz-padding-start: -3px;
+    background: url(000000-0.png) repeat;
+    font-family: "New Rocker", monospace;
+    font-size: 16px;
+    scrollbar-width: none;
+}
+#singleplayer_melody_select select option {
+    text-align: center;
+}
+#singleplayer_melody_select select::-webkit-scrollbar {
+    display: none;
+}
+/* end melody select */
+/* ------------------------------------------------------------------- */
 /* testarea */
 
 canvas {
@@ -275,3 +349,30 @@ canvas {
 #backgroundTrackVolume {
     z-index: 2;
 }
+
+/* end testarea */
+/* ------------------------------------------------------------------- */
+
+/* calibration */
+
+#calibration {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+#calibration .rainbow-wrap {
+    margin: auto;
+}
+#calibration-overlay {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+#calibration-overlay #overlay-countdown-p {
+    font-size: 5rem;
+    margin-top: 1rem;
+}
+
+/* end calibration */
+/* ------------------------------------------------------------------- */
+
