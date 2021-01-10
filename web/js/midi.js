@@ -36,7 +36,7 @@ function connectMidiDevice(midi) {
     })
 
     midi.outputs.forEach(function (device) {
-        if (device.name === sessionStorage.getItem("MidiDevice")) {
+        if (device.name.includes(sessionStorage.getItem("MidiDevice"))) {
             midi_out = device
         }
     })
