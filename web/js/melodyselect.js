@@ -8,10 +8,9 @@ function addSelectOptions() {
             lines = data.split("\n")
             lines.forEach((line) => {
                 if (line === "") return
-                let name = line.split(".")[0]
                 let option = document.createElement("option")
-                option.setAttribute("id", name)
-                option.innerText = name
+                option.setAttribute("id", line)
+                option.innerText = line
                 document.getElementById("melodyselect").appendChild(option)
             })
         })
@@ -20,6 +19,5 @@ function addSelectOptions() {
 function selectMelody() {
     let selectEl = document.getElementById("melodyselect")
     if (selectEl.value === "") return
-
     sessionStorage.setItem("melodyFile", selectEl.value)
 }
