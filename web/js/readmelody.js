@@ -5,7 +5,16 @@ function readMelodyfile() {
             //Translate the csv and save it to song
             console.log(textmelody)
             song = processData(textmelody)
-            startGameAnimation()
+
+            playBackTrack(0, sessionStorage.getItem("melodyFile"))
+
+            let timer = setInterval(function () {
+                if (context.currentTime > 0) {
+                    console.log(context.currentTime)
+                    startGameAnimation()
+                    clearInterval(timer)
+                }
+            }, 10)
         })
 }
 

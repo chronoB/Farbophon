@@ -11,8 +11,7 @@ let strMidiNote
 document.addEventListener("DOMContentLoaded", initSingleplayer)
 
 function initSingleplayer() {
-    startTime = new Date().getTime()
-
+    wH = window.outerHeight
     readMelodyfile()
 }
 
@@ -24,35 +23,42 @@ function evalMidiInput(note) {
     scaleMidiNote()
 }
 
+function gameAnimation(ret) {
+    let time = new Date().getTime()
+    let curNote = song[counter]
+    if (curNote.note === -1) {
+        clearInterval(ret)
+        window.setTimeout(activateHighscoreOverlay, 6000)
+        return
+    }
+    if (time - startTime >= curNote.time - preTime) {
+        console.log(context.currentTime)
+        window.setTimeout(() => {
+            updateScore(curNote)
+        }, preTime)
+        let strCurNote = document.querySelector(".string_" + curNote.note)
+        let id = Math.random()
+            .toString(36)
+            .replace(/[^a-z]+/g, "")
+            .substr(0, 5)
+        let button = document.createElement("button")
+        button.setAttribute("id", id)
+        strCurNote.appendChild(button)
+        strCurNote
+            .querySelector("#" + id)
+            .animate([{ top: 0 }, { top: 96 + "%" }], {
+                duration: preTime,
+            })
+        window.setTimeout(() => deleteButton(id), preTime)
+        counter += 1
+    }
+}
+
 function startGameAnimation() {
-    ret = setInterval(function () {
-        let time = Math.ceil(new Date().getTime())
-        let curNote = song[counter]
-        if (curNote.note === -1) {
-            clearInterval(ret)
-            window.setTimeout(activateHighscoreOverlay, 6000)
-            return
-        }
-        if (time - startTime >= curNote.time + preTime) {
-            window.setTimeout(() => {
-                updateScore(curNote)
-            }, 5000)
-            let strCurNote = document.querySelector(".string_" + curNote.note)
-            let id = Math.random()
-                .toString(36)
-                .replace(/[^a-z]+/g, "")
-                .substr(0, 5)
-            let button = document.createElement("button")
-            button.setAttribute("id", id)
-            strCurNote.appendChild(button)
-            strCurNote
-                .querySelector("#" + id)
-                .animate([{ top: 0 }, { top: 96 + "%" }], {
-                    duration: preTime,
-                })
-            window.setTimeout(() => deleteButton(id), preTime)
-            counter += 1
-        }
+    startTime = new Date().getTime()
+    gameAnimation()
+    let ret = setInterval(() => {
+        gameAnimation(ret)
     }, 100)
 }
 
@@ -81,7 +87,7 @@ function displayScore() {
 /*highscore*/
 
 function activateHighscoreOverlay() {
-    midiDevice.removeEventListener("midimessage", onMIDIMessage)
+    midi_in.removeEventListener("midimessage", onMIDIMessage)
     document.querySelector("#highscore-screen").style.display = "flex"
     document.querySelector("#userscore").innerText = score
     if (sessionStorage.getItem("Server-Token")) {
