@@ -1,5 +1,4 @@
 let song = []
-let wh = 0
 let startTime = 0
 let counter = 0
 let preTime = 5000
