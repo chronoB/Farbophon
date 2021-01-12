@@ -25,7 +25,7 @@ function evalMidiInput(note) {
 }
 
 function gameAnimation(ret) {
-    let time = Math.ceil(new Date().getTime())
+    let time = new Date().getTime()
     let curNote = song[counter]
     if (curNote.note === -1) {
         clearInterval(ret)
