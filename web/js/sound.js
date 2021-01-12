@@ -32,7 +32,7 @@ function playSound(note) {
 
 function playBackTrack(playBack, soundName) {
     if (!playBack) {
-        fetch("/web/soundfiles/BackTrack" + soundName + ".mp3")
+        fetch("/web/soundfiles/" + soundName + ".mp3")
             // Antwort in Array parsen
             .then((response) => response.arrayBuffer())
             // Array in Buffer Wandeln
