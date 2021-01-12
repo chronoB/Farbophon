@@ -19,5 +19,6 @@ function addSelectOptions() {
 function selectMelody() {
     let selectEl = document.getElementById("melodyselect")
     if (selectEl.value === "") return
-    sessionStorage.setItem("melodyFile", selectEl.value)
+
+    sessionStorage.setItem("melodyFile", selectEl.value.split(".")[0])
 }
