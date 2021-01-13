@@ -105,10 +105,16 @@ function processHighscore() {
                     login(user, pw)
                 })
                 .then((data) => {
+                    loginSuccessful()
                     _sendHighscore(data)
                 })
         } else {
             login(user, pw).then((data) => {
+                if (data === -1) {
+                    loginError()
+                    return
+                }
+                loginSuccessful()
                 _sendHighscore(data)
             })
         }
@@ -129,7 +135,7 @@ function _sendHighscore(data) {
     ).then(() => {
         updateHighscore()
         document.querySelector("#login-button").setAttribute("disabled", "")
-        document.querySelector("#login-button").style.opacity = 0.5
+        document.querySelector("#login-button").style.opacity = 0.2
     })
 }
 
@@ -159,4 +165,12 @@ function updateHighscore() {
             document.querySelector("#highscores").appendChild(div)
         })
     })
+}
+
+function loginError() {
+    document.querySelector("#login").style.borderColor = "red"
+    document.querySelector("#login").style.borderStyle = "dashed"
+}
+function loginSuccessful() {
+    document.querySelector("#login").style.borderStyle = "none"
 }

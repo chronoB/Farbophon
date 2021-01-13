@@ -40,6 +40,9 @@ function login(user, password) {
         sessionStorage.getItem("Server-URI") + "/farbophon/login",
         options
     ).then((request) => {
+        if (request.status === 401) {
+            return -1
+        }
         return request.json().then((data) => {
             sessionStorage.setItem("Server-Token", data.token)
             sessionStorage.setItem("user", user)
