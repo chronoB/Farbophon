@@ -89,7 +89,15 @@ function displayScore() {
 function activateHighscoreOverlay() {
     midi_in.removeEventListener("midimessage", onMIDIMessage)
     document.querySelector("#highscore-screen").style.display = "flex"
-    document.querySelector("#userscore").innerText = score
+    if (score > 0)
+        document.querySelector("#userscore").innerText =
+            "Glückwunsch, du hast " + score + " Punkte erreicht."
+    else
+        document.querySelector("#userscore").innerText =
+            "Schade, du hast " +
+            score +
+            " Punkte erreicht. Versuche es nochmal!"
+
     if (sessionStorage.getItem("Server-Token")) {
         document.querySelector("#login").style.display = "none"
     }
