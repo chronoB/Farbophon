@@ -316,7 +316,7 @@ button {
     /* ... */
     width: 100%;
     -moz-padding-start: -3px;
-    background: url(000000-0.png) repeat;
+    background: url(/web/assets/000000-0.png) repeat;
     font-family: "New Rocker", monospace;
     font-size: 16px;
     scrollbar-width: none;
@@ -375,4 +375,3 @@ canvas {
 
 /* end calibration */
 /* ------------------------------------------------------------------- */
-
