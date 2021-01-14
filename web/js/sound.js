@@ -32,22 +32,26 @@ function playSound(note) {
 
 function playBackTrack(playBack, soundName) {
     if (!playBack) {
-        fetch("/web/soundfiles/" + soundName + ".mp3")
-            // Antwort in Array parsen
-            .then((response) => response.arrayBuffer())
-            // Array in Buffer Wandeln
-            .then((undecodedAudio) => context.decodeAudioData(undecodedAudio))
-            // Buffer in SourceBufferNode wandeln und abspielen
-            .then((audioBuffer) => {
-                playBackBufferNode = context.createBufferSource()
-                playBackBufferNode.buffer = audioBuffer
-                playBackBufferNode.connect(playBackGainNode)
-                playBackGainNode.connect(context.destination)
-                playBackBufferNode.start(context.currentTime)
-            })
-    } else {
-        playBackBufferNode.stop()
+        return (
+            fetch("/web/soundfiles/" + soundName + ".mp3")
+                // Antwort in Array parsen
+                .then((response) => response.arrayBuffer())
+                // Array in Buffer Wandeln
+                .then((undecodedAudio) =>
+                    context.decodeAudioData(undecodedAudio)
+                )
+                // Buffer in SourceBufferNode wandeln und abspielen
+                .then((audioBuffer) => {
+                    playBackBufferNode = context.createBufferSource()
+                    playBackBufferNode.buffer = audioBuffer
+                    playBackBufferNode.connect(playBackGainNode)
+                    playBackGainNode.connect(context.destination)
+                    playBackBufferNode.start(context.currentTime)
+                    return context.currentTime
+                })
+        )
     }
+    playBackBufferNode.stop()
 }
 
 function updateBackTrackVol(e) {

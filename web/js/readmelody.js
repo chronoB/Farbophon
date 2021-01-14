@@ -6,15 +6,9 @@ function readMelodyfile() {
             console.log(textmelody)
             song = processData(textmelody)
 
-            playBackTrack(0, sessionStorage.getItem("melodyFile"))
-
-            let timer = setInterval(function () {
-                if (context.currentTime > 0) {
-                    console.log(context.currentTime)
-                    startGameAnimation()
-                    clearInterval(timer)
-                }
-            }, 10)
+            playBackTrack(0, sessionStorage.getItem("melodyFile")).then(() => {
+                startGameAnimation()
+            })
         })
 }
 
