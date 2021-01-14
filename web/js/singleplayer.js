@@ -100,14 +100,12 @@ function processHighscore() {
         let user = document.querySelector("#username-input").value
         let pw = document.querySelector("#password").value
         if (document.querySelector("#should-register").checked) {
-            register(user, pw)
-                .then((data) => {
-                    login(user, pw)
-                })
-                .then((data) => {
+            register(user, pw).then((_) => {
+                login(user, pw).then((data) => {
                     loginSuccessful()
                     _sendHighscore(data)
                 })
+            })
         } else {
             login(user, pw).then((data) => {
                 if (data === -1) {
