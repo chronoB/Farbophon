@@ -2,8 +2,12 @@ document.addEventListener("DOMContentLoaded", initMidiDevice)
 
 let midi_in
 let midi_out
+let shouldEvalMidiInput = true
 
 function initMidiDevice() {
+    if (window.location.href.includes("calibration.html")) {
+        shouldEvalMidiInput = false
+    }
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(connectMidiDevice, errorHandler)
     } else {
@@ -48,7 +52,8 @@ function errorHandler(error) {
 }
 
 function onMIDIMessage(event) {
-    console.log(event.data)
+    if (!shouldEvalMidiInput) return
+
     onOff = event.data[0]
 
     if (onOff === 144) {
@@ -56,10 +61,6 @@ function onMIDIMessage(event) {
         let note = event.data[1]
         evalMidiInput(note)
         playSound(note)
-    } else if (onOff === 128) {
-        // Note off
-        let note = event.data[1]
-        //remove sound
     }
 }
 
