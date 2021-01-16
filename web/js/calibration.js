@@ -4,10 +4,16 @@ function initCalibration() {
     let calButton = document.querySelector("#calibration-button")
 
     calButton.addEventListener("click", (event) => startCalibration(event))
-
-    if (document.referrer.includes("singleplayerMelodySelect.html")) {
+    let splitReferrer = document.referrer.split("/")
+    if (
+        splitReferrer[splitReferrer.length - 1] ===
+        "singleplayerMelodySelect.html"
+    ) {
         calButton.setAttribute("data-target", "/web/html/singleplayer.html")
-    } else if (document.referrer.includes("index.html")) {
+    } else if (
+        splitReferrer[splitReferrer.length - 2] === "web" ||
+        splitReferrer[splitReferrer.length - 1] === "index.html"
+    ) {
         calButton.setAttribute("data-target", "/web/html/testarea.html")
     }
 }
