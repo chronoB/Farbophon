@@ -2,9 +2,12 @@ document.addEventListener("DOMContentLoaded", initMidiDevice)
 
 let midi_in
 let midi_out
-let shouldEvalMidiInput = false
+let shouldEvalMidiInput = true
 
 function initMidiDevice() {
+    if (window.location.href.includes("calibration.html")) {
+        shouldEvalMidiInput = false
+    }
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(connectMidiDevice, errorHandler)
     } else {
@@ -62,6 +65,5 @@ function onMIDIMessage(event) {
 }
 
 function sendMidi(event, key, velocity) {
-    shouldEvalMidiInput = true
     midi_out.send([event, key, velocity])
 }
