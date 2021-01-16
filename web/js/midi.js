@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", initMidiDevice)
 
+let midi_in
+let midi_out
+let shouldEvalMidiInput = true
+
 function initMidiDevice() {
+    if (window.location.href.includes("calibration.html")) {
+        shouldEvalMidiInput = false
+    }
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(connectMidiDevice, errorHandler)
     } else {
@@ -16,8 +23,11 @@ function connectMidiDevice(midi) {
         // wenn Name von einem Input mit dem aus der config übereinstimmt
         if (device.name.includes(sessionStorage.getItem("MidiDevice"))) {
             // eventlistener für MIDI Noten hinzufügen
-            device.addEventListener("midimessage", onMIDIMessage)
+            midi_in = device
+            midi_in.addEventListener("midimessage", onMIDIMessage)
         } else {
+            //TODO: This should only be displayed if really no input is found.
+            //not on every input that is not the desired input
             console.error(
                 "Configured device not found in possible midi inputs:"
             )
@@ -30,8 +40,8 @@ function connectMidiDevice(midi) {
     })
 
     midi.outputs.forEach(function (device) {
-        if (device.name == sessionStorage.getItem("MidiDevice")) {
-            const MIDI_OUT = device
+        if (device.name.includes(sessionStorage.getItem("MidiDevice"))) {
+            midi_out = device
         }
     })
 }
@@ -42,7 +52,8 @@ function errorHandler(error) {
 }
 
 function onMIDIMessage(event) {
-    console.log(event.data)
+    if (!shouldEvalMidiInput) return
+
     onOff = event.data[0]
 
     if (onOff === 144) {
@@ -50,9 +61,9 @@ function onMIDIMessage(event) {
         let note = event.data[1]
         evalMidiInput(note)
         playSound(note)
-    } else if (onOff === 128) {
-        // Note off
-        let note = event.data[1]
-        //remove sound
     }
+}
+
+function sendMidi(event, key, velocity) {
+    midi_out.send([event, key, velocity])
 }

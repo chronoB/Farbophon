@@ -1,3 +1,4 @@
+import os
 import time
 
 import cv2
@@ -6,13 +7,19 @@ import rtmidi as midi
 
 config = {}
 try:
-    # bei MAC: open("config",... // WIN: open("../config",... (?)
-    configFile = open("../config", "rt", encoding="utf-8")
-    lines = configFile.readlines()
-    for line in lines:
-        line = line.strip().split("=")
-        config[line[0]] = line[1]
-except Exception as e:
+
+    # this lets you start this file from the root folder
+    # and from the python folder
+    if "config" in os.listdir():
+        if "python" in os.listdir():
+            os.chdir("python")
+    with open("../config", "rt", encoding="utf-8") as configFile:
+        lines = configFile.readlines()
+        for line in lines:
+            line = line.strip().split("=")
+            config[line[0]] = line[1]
+except IOError as e:
+
     print(f"Fehler beim Lesen der Konfigurationsdatei.\n{e}")
     exit(1)
 

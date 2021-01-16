@@ -1,13 +1,17 @@
-let context = new AudioContext()
-let bpm = 100
+document.addEventListener("DOMContentLoaded", initSound)
 
-function playNoteperBPM() {
-    playSound(soundname)
-    window.setTimeout(playNoteperBPM, (1000 / bpm) * 60)
+let context, sourceBufferNode, playBackBufferNode, playBackGainNode
+
+function initSound() {
+    context = new AudioContext()
+    playBackGainNode = context.createGain()
 }
 
 function playSound(note) {
     strNote = String(note)
+    //stop current sound
+    if (sourceBufferNode !== undefined)
+        sourceBufferNode.stop(context.currentTime)
     if (strNote.includes("7") || strNote === "") {
         return
     }
@@ -19,9 +23,38 @@ function playSound(note) {
         .then((undecodedAudio) => context.decodeAudioData(undecodedAudio))
         // Buffer in SourceBufferNode wandeln und abspielen
         .then((audioBuffer) => {
-            let sourceBufferNode = context.createBufferSource()
+            sourceBufferNode = context.createBufferSource()
             sourceBufferNode.buffer = audioBuffer
             sourceBufferNode.connect(context.destination)
             sourceBufferNode.start(context.currentTime)
         })
+}
+
+function playBackTrack(playBack, soundName) {
+    if (!playBack) {
+        return (
+            fetch("/web/soundfiles/" + soundName + ".mp3")
+                // Antwort in Array parsen
+                .then((response) => response.arrayBuffer())
+                // Array in Buffer Wandeln
+                .then((undecodedAudio) =>
+                    context.decodeAudioData(undecodedAudio)
+                )
+                // Buffer in SourceBufferNode wandeln und abspielen
+                .then((audioBuffer) => {
+                    playBackBufferNode = context.createBufferSource()
+                    playBackBufferNode.buffer = audioBuffer
+                    playBackBufferNode.connect(playBackGainNode)
+                    playBackGainNode.connect(context.destination)
+                    playBackBufferNode.start(context.currentTime)
+                    return context.currentTime
+                })
+        )
+    }
+    playBackBufferNode.stop()
+}
+
+function updateBackTrackVol(e) {
+    let gain = e.target.value / 100
+    playBackGainNode.gain.value = gain
 }

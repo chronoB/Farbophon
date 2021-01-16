@@ -40,17 +40,22 @@ function login(user, password) {
         sessionStorage.getItem("Server-URI") + "/farbophon/login",
         options
     ).then((request) => {
+        if (request.status === 401) {
+            return -1
+        }
         return request.json().then((data) => {
             sessionStorage.setItem("Server-Token", data.token)
+            sessionStorage.setItem("user", user)
             return data
         })
     })
 }
 
-function sendHighscore(user, score) {
+function sendHighscore(user, score, song) {
     payload = {
         name: user,
         score: score,
+        song: song,
     }
 
     let options = {
@@ -71,12 +76,14 @@ function sendHighscore(user, score) {
     })
 }
 
-function getHighscore() {
+function getHighscore(song) {
     let options = {
         method: "get",
     }
     return fetch(
-        sessionStorage.getItem("Server-URI") + "/farbophon/getHighscore",
+        sessionStorage.getItem("Server-URI") +
+            "/farbophon/getHighscore?song=" +
+            song,
         options
     ).then((request) => {
         return request.json().then((data) => {
