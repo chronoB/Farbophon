@@ -3,7 +3,6 @@ function readMelodyfile() {
         .then((response) => response.text())
         .then((textmelody) => {
             //Translate the csv and save it to song
-            console.log(textmelody)
             song = processData(textmelody)
 
             playBackTrack(0, sessionStorage.getItem("melodyFile")).then(() => {
