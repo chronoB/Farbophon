@@ -32,7 +32,6 @@ function gameAnimation(ret) {
         return
     }
     if (time - startTime >= curNote.time - preTime) {
-        console.log(context.currentTime)
         window.setTimeout(() => {
             updateScore(curNote)
         }, preTime)
@@ -97,52 +96,27 @@ function activateHighscoreOverlay() {
             "Schade, du hast " +
             score +
             " Punkte erreicht. Versuche es nochmal!"
-
-    if (sessionStorage.getItem("Server-Token")) {
-        document.querySelector("#login").style.display = "none"
-    }
     updateHighscore()
 }
-function processHighscore() {
-    if (!sessionStorage.getItem("Server-Token")) {
-        let user = document.querySelector("#username-input").value
-        let pw = document.querySelector("#password").value
-        if (document.querySelector("#should-register").checked) {
-            register(user, pw).then((_) => {
-                login(user, pw).then((data) => {
-                    loginSuccessful()
-                    _sendHighscore(data)
-                })
-            })
-        } else {
-            login(user, pw).then((data) => {
-                if (data === -1) {
-                    loginError()
-                    return
-                }
-                loginSuccessful()
-                _sendHighscore(data)
-            })
-        }
-    } else {
-        _sendHighscore("OK")
-    }
-}
 
-function _sendHighscore(data) {
-    if (data === undefined) {
-        //TODO: output to user that login has failed
-        return
+function _sendHighscore() {
+    if (sessionStorage.getItem("API-Key")) {
+        sendHighscore(
+            document.querySelector("#username-input").value,
+            score,
+            sessionStorage.getItem("melodyFile")
+        ).then((data) => {
+            if (data.status !== "success") {
+                _apiError("wrong")
+                return
+            }
+            updateHighscore()
+            document.querySelector("#login-button").setAttribute("disabled", "")
+            document.querySelector("#login-button").style.opacity = 0.2
+        })
+    } else {
+        _apiError("missing")
     }
-    sendHighscore(
-        sessionStorage.getItem("user"),
-        score,
-        sessionStorage.getItem("melodyFile")
-    ).then(() => {
-        updateHighscore()
-        document.querySelector("#login-button").setAttribute("disabled", "")
-        document.querySelector("#login-button").style.opacity = 0.2
-    })
 }
 
 function updateHighscore() {
@@ -173,10 +147,16 @@ function updateHighscore() {
     })
 }
 
-function loginError() {
+const API_ERROR_TEXT = {
+    missing:
+        "Du hast keinen API-Key. Setz dich mit dem Admin des Servers in Kontakt, um einen API-Key zu bekommen.",
+    wrong:
+        "Du hast einen falschen API-Key. Versuchst du dich zum richtigen Server zu verbinden?",
+}
+function _apiError(infoText) {
     document.querySelector("#login").style.borderColor = "red"
     document.querySelector("#login").style.borderStyle = "dashed"
-}
-function loginSuccessful() {
-    document.querySelector("#login").style.borderStyle = "none"
+    document.querySelector("#info-text").innerText = API_ERROR_TEXT[infoText]
+    document.querySelector("#login-button").setAttribute("disabled", "")
+    document.querySelector("#login-button").style.opacity = 0.2
 }

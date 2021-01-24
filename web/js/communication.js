@@ -6,51 +6,6 @@ function initialize() {
     }
 }
 
-function register(user, password) {
-    payload = {
-        name: user,
-        password: password,
-    }
-    let options = {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-    }
-    return fetch(
-        sessionStorage.getItem("Server-URI") + "/farbophon/register",
-        options
-    ).then((request) => {
-        return request.json().then((data) => {
-            return data
-        })
-    })
-}
-
-function login(user, password) {
-    let options = {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-            authorization: "Basic " + btoa(user + ":" + password),
-        },
-    }
-    return fetch(
-        sessionStorage.getItem("Server-URI") + "/farbophon/login",
-        options
-    ).then((request) => {
-        if (request.status === 401) {
-            return -1
-        }
-        return request.json().then((data) => {
-            sessionStorage.setItem("Server-Token", data.token)
-            sessionStorage.setItem("user", user)
-            return data
-        })
-    })
-}
-
 function sendHighscore(user, score, song) {
     payload = {
         name: user,
@@ -61,7 +16,7 @@ function sendHighscore(user, score, song) {
     let options = {
         method: "post",
         headers: {
-            "x-access-tokens": sessionStorage.getItem("Server-Token"),
+            "x-access-tokens": sessionStorage.getItem("API-Key"),
             "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),

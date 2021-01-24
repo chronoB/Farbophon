@@ -268,7 +268,7 @@ button {
     align-items: center;
 }
 #highscore-screen #login {
-    margin-top: 2em;
+    margin: 2em 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -288,9 +288,6 @@ button {
 #highscores > div {
     display: flex;
     justify-content: space-between;
-}
-#highscores > div > span {
-    margin-bottom: 5px;
 }
 
 /* end single player */

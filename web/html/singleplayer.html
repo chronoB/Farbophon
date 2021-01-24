@@ -31,7 +31,7 @@
         <div id="highscore-screen">
             <div id="text">
                 <p id="userscore"></p>
-                <p>
+                <p id="info-text">
                     Speichere deinen Highscore online und vergleiche dich mit
                     den anderen Spieler*Innen!
                 </p>
@@ -39,12 +39,8 @@
             <div id="login">
                 <label for="username-input"> Benutzername: </label>
                 <input type="text" id="username-input" />
-                <label for="password"> Passwort: </label>
-                <input type="password" id="password" />
-                <label for="should-register"> Neuen Benutzer anlegen? </label>
-                <input type="checkbox" id="should-register" />
             </div>
-            <button id="login-button" onclick="processHighscore()">
+            <button id="login-button" onclick="_sendHighscore()">
                 Highscore abschicken
             </button>
             <div id="highscores">
